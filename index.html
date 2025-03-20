@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Vadym Diakonov">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Hosted Page Generators</title>
+    <link rel="shortcut icon" href="https://developers.worldnetpayments.com/lib/tpl/WORLDNET/images/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        a:hover {color: #ff6900; }  /* 0051c2 */
+        .container { max-width: 960px; }
+        .icon-48 { font-size: 48px; }
+        .icon-24 { font-size: 24px; }
+        .bi-bold { -webkit-text-stroke: 1px; }
+        .fs-md { font-size: 1em; }
+        .fs-sm { font-size: 0.875em; }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container">
+  <header class="bg-dark bg-gradient">
+    <div class="d-flex flex-column flex-md-row py-2 align-items-center border-bottom">
+      <img class="ms-3" src="https://partners.payroc.com/hubfs/payroc-logo-white-01.png" alt="" width="64px">
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
+        <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
+        <a class="me-3 py-2 link-secondary text-decoration-none" href="subscriptionpage.html">Subscriptions</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="my-3 text-center">
+      <h3 class="display-6 fw-normal">Hosted Page Generators</h3>
+      <p>Get started with one of our generators for comprehensive testing of the Hosted Pages. On the helper form, select your environment, set the terminal number and secret, and fill in other fields as needed - then you're ready to go.</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 my-4 justify-content-center text-center">
+      <div class="col">
+        <div class="card rounded-3 shadow-sm">
+          <a href="paymentpage.html" class="card-body text-decoration-none">
+            <i class="bi bi-cart3 icon-48"></i>
+            <h4>Payments Page</h4>
+            <p class="m-0">Process Card and Bank Transfer payments</p>
+          </a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card rounded-3 shadow-sm">
+          <a href="securecardpage.html" class="card-body text-decoration-none">
+            <i class="bi bi-credit-card icon-48"></i>
+            <h4>Secure Tokens</h4>
+            <p class="m-0">Store card details to charge your customers later</p>
+          </a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card rounded-3 shadow-sm">
+          <a href="subscriptionpage.html" class="card-body text-decoration-none">
+            <i class="bi bi-infinity icon-48 bi-bold"></i> <!-- bi-file-earmark-bar-graph-->
+            <h4>Subscriptions</h4>
+            <p class="m-0">Collect recurring payments hassle-free</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4 justify-content-center text-center">
+      <div class="col-4">
+        <div class="card rounded-3 h-auto shadow-sm">
+          <a href="bulkpayments.html" class="card-body text-decoration-none">
+            <i class="bi bi-list-columns icon-24"></i>
+            <h5>Bulk Payments</h5>
+            <p class="fs-sm m-0">Upload CSV file with transactions</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card rounded-3 h-auto shadow-sm">
+          <a href="mpi.html" class="card-body text-decoration-none">
+            <i class="bi bi-shield icon-24"></i>
+            <h5>MPI</h5>
+            <p class="fs-sm m-0">3D Secure and SCA</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-4 p-2 border rounded-pill justify-content-center text-center"> 
+        <p class="fs-sm m-0 text-secondary"><i class="me-2 bi bi-info-circle"></i>What You Can Do: Send GET and POST requests, embed a page inside an iframe with GET and POST methods, use an optional iframe's sandbox attribute with configurable tokens, access various Nettraxion capabilities such as MD5 or SHA-512 hashing, Ecom/Moto/CHP transaction types, AVS, DCC, Level 2 and Level 3 data, Tokenization, Background validation, and more.</p>
+    </div>
+  </main>
+
+  <footer class="mt-5 pt-3 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <small class="mb-3 link-secondary">© 2025 Payroc</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://developers.worldnetpayments.com/hosted_pages:hpp_background_validation">Background Validation</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Enhanced Data</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://payroc.atlassian.net/wiki/x/6oDMjQ">Convenience Fee</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://payroc.atlassian.net/wiki/x/TIJBo">eDCC</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://payroc.atlassian.net/wiki/x/AoAduw">Google Pay</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://payroc.atlassian.net/wiki/x/qgC-tQ">HPP Cardholder Present</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://developers.worldnetpayments.com/hosted_pages:introduction">Hosted Pages Docs</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://developers.worldnetpayments.com/selfcare:api_specification:bulk_payments_features">Bulk Payments</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://developers.worldnetpayments.com/selfcare:api_specification:3d_secure">3D Secure</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#" title="Use on your own risk">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
