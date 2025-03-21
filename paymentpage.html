@@ -68,420 +68,425 @@
 <body class="d-flex flex-column h-100 bg-light" onload="orderId(); setDateTime(); updateHash();">
 <div class="container">
 <header class="bg-dark bg-gradient">
-        <div class="row py-2 text-center">
-            <div class="col-1 ms-4 text-start"><a class="link-secondary" href="index.html"><i class="bi bi-house-door icon-24"></i></a></div>
-            <h4 class="col-7 my-1 text-light">Hosted Payment Page Generator</h4>
-        </div>
+    <div class="row py-2 text-center">
+        <div class="col-1 ms-4 text-start"><a class="link-secondary" href="index.html"><i class="bi bi-house-door icon-24"></i></a></div>
+        <h4 class="col-6 my-1 text-light">Hosted Payment Page Generator</h4>
+        <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="subscriptionpage.html">Subscriptions</a>
+        </nav>
+    </div>
 </header>
 
 <main class="flex-shrink-0 pt-3">
-        <div class="row">
-            <div class="col-md-5 order-md-last">
-                <div class="sticky-top bg-light">
-                    <button form="awesomeForm" class="btn btn-primary btn-md" type="submit" title="Go to HPP">Open HPP</button>
-                    <button form="awesomeForm" class="btn btn-success btn-md" type="button" onclick="loadIframe();" title="Load HPP in IFrame via GET">IFrameGET</button>
-                    <button form="awesomeForm" class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HPP in IFrame via POST">IFramePOST</button>
-                    <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="orderId(); updateHash();">New OrderID</button>
-                    <button form="awesomeForm" class="btn btn-outline-secondary btn-md" type="button" onclick="resetPage();">Reset</button>
-                </div>
-
-                <br />
-                <div id="iframeContainer" class="input-group input-group-sm visually-hidden" style="width:527px; !important;">
-                    <span class="input-group-text" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
-                    <input type="text" class="form-control form-control-sm" id="hppURLForSharing" tabindex="-1" readonly />
-                    <iframe id="iframe" name="worldnet-payment" width="100%" height="700px" style="margin:0; border:1px solid #ccc; border-top:none;" 
-                            src="about:blank" allow="payment"></iframe>
-                </div>
+    <div class="row">
+        <div class="col-md-5 order-md-last">
+            <div class="sticky-top bg-light">
+                <button form="awesomeForm" class="btn btn-primary btn-md" type="submit" title="Go to HPP">Open HPP</button>
+                <button form="awesomeForm" class="btn btn-success btn-md" type="button" onclick="loadIframe();" title="Load HPP in IFrame via GET">IFrameGET</button>
+                <button form="awesomeForm" class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HPP in IFrame via POST">IFramePOST</button>
+                <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="orderId(); updateHash();">New OrderID</button>
+                <button form="awesomeForm" class="btn btn-outline-secondary btn-md" type="button" onclick="resetPage();">Reset</button>
             </div>
 
-            <div class="col-md-7">
-                <form method="POST" id="awesomeForm" name="awesomeForm" target="_blank" action="">
-                    <div class="row g-1 justify-content-end">
-                        <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
-                        <div class="col-sm-7">
-                            <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action=this.value;">
-                                <option value="https://vagrant.wntps.com/merchant/paymentpage" selected>https://vagrant.wntps.com/merchant/paymentpage</option>
-                                <option value="https://vagrant.wntps.com/merchant/preauthpage">https://vagrant.wntps.com/merchant/preauthpage</option>
-                                <option value="https://lpivotal.wntps.com/merchant/paymentpage">https://lpivotal.wntps.com/merchant/paymentpage</option>
-                                <option value="https://lpivotal.wntps.com/merchant/preauthpage">https://lpivotal.wntps.com/merchant/preauthpage</option>
-                                <option value="https://lnuvei.wntps.com/merchant/paymentpage">https://lnuvei.wntps.com/merchant/paymentpage</option>
-                                <option value="https://lgoepay.wntps.com/merchant/paymentpage">https://lgoepay.wntps.com/merchant/paymentpage</option>
-                                <option value="">—————————— MQA ————————————————————————</option>
-                                <option value="https://qawslynxwn.worldnettps.com/merchant/paymentpage">https://qalynxwn.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://qawslynxwn.worldnettps.com/merchant/preauthpage">https://qalynxwn.worldnettps.com/merchant/preauthpage</option>
-                                <option value="https://qawsironwn.worldnettps.com/merchant/paymentpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://qawsironwn.worldnettps.com/merchant/preauthpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://qawshoundwn.worldnettps.com/merchant/paymentpage">https://qawshoundwn.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://qawshoundwn.worldnettps.com/merchant/preauthpage">https://qawshoundgo.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/paymentpage">https://qawsjazzwn.worldnettps.com/merchant/paymentpage</option>
-                                <option value="">—————————— GCP ————————————————————————</option>
-                                <option value="https://qautobot.worldnettps.com/merchant/paymentpage">https://qautobot.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://vagrant.worldnettps.com/merchant/paymentpage">https://vagrant.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://vagrant.worldnettps.com/merchant/preauthpage">https://vagrant.worldnettps.com/merchant/preauthpage</option>
-                                <option value="https://testpayments.worldnettps.com/merchant/paymentpage">https://testpayments.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://testpayments.nuvei.com/merchant/paymentpage">https://testpayments.nuvei.com/merchant/paymentpage</option>
-                                <option value="">—————————— Prod ————————————————————————</option>
-                                <option value="https://payments.worldnettps.com/merchant/paymentpage">https://payments.worldnettps.com/merchant/paymentpage</option>
-                                <option value="https://payments.worldnettps.com/merchant/preauthpage">https://payments.worldnettps.com/merchant/preauthpage</option>
-                                <option value="https://payments.nuvei.com/merchant/paymentpage">https://payments.nuvei.com/merchant/paymentpage</option>
-                                <option value="https://payments.nuvei.com/merchant/preauthpage">https://payments.nuvei.com/merchant/preauthpage</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2" title="Method (ignored for IFrames)">
-                            <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method=this.value;">
-                                <option value="GET">GET</option>
-                                <option value="POST" selected>POST</option>
-                            </select>
-                        </div>
-
-                        <div class="col-sm-3"><label for="OTHERFIELD_SANDBOX" class="form-label">iSandbox restrictions</label></div>
-                        <div class="col-sm-9">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" id="enableSandbox" onchange="document.getElementById('OTHERFIELD_SANDBOX').disabled = !this.checked;" /></span>
-                                <input list="sandboxrestrictions" type="text" class="form-control form-control-sm" id="OTHERFIELD_SANDBOX" 
-                                       value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" title="Blank value will apply all restrictions" disabled />
-                                    <datalist id="sandboxrestrictions">
-                                        <option value="allow-modals allow-forms allow-popups allow-scripts" />
-                                        <option value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
-                                    </datalist>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3"><label for="TERMINALID" class="form-label">Terminal</label></div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();" />
-                        </div>
-                        <div class="col-sm-2 text-start" title="Multi-Currency">
-                            <input type="checkbox" class="form-check-input" id="multicurrency" onchange="updateHash();" />
-                            <label for="multicurrency" class="form-label">MC</label>
-                        </div>
-                        <div class="col-sm-2">
-                            <select class="form-select form-select-sm" name="TERMINALTYPE" title="TERMINALTYPE">
-                                <option value="1">1 - Moto</option>
-                                <option value="2" selected>2 - Internet</option>
-                                <option value="3">3 - CHP</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <input list="txntypes" type="text" class="form-control form-control-sm" name="TRANSACTIONTYPE" title="TRANSACTIONTYPE">
-                                <datalist id="txntypes">
-                                    <option value="4">Normal Mail order/Telephone Order trans</option>
-                                    <option value="5">3DS fully authenticated trans</option>
-                                    <option value="6">3DS attempted trans</option>
-                                    <option value="7">Normal eCommerce trans</option>
-                                </datalist>
-                        </div>
-
-                        <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" onchange="updateHash();" />
-                        </div>
-                        <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
-                            <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
-                            <label for="sha512" class="form-label" style="font-size:11px;">SHA<br/>512</label>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
-                                <span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise"></i></span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row g-1 py-2 justify-content-end">
-                        <div class="col-sm-3"><label for="ORDERID" class="form-label">Order ID</label></div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control form-control-sm" id="ORDERID" name="ORDERID" maxlength="20" oninput="updateHash();" />
-                                <!-- maxlength > 12 to be able to test order ids more then 12 chars in length -->
-                                <span class="input-group-text input-group-btn" onclick="orderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div>
-                        <div class="col-sm-5">
-                            <div class="input-group input-group-sm" title="DATETIME">
-                                <span class="input-group-text"><i class="bi bi-clock"></i></span>
-                                <input type="text" class="form-control form-control-sm" id="DATETIME" name="DATETIME" title="DATETIME" placeholder="DD-MM-YYYY:HH:MM:SS:SSS" value="01-01-2024:00:00:00:000" onchange="updateHash();">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3"><label for="AMOUNT" class="form-label">Amount</label></div>
-                        <div class="col-sm-2">
-                            <select class="form-select form-select-sm" id="CURRENCY" name="CURRENCY" onchange="updateHash();">
-                                <option value="EUR">EUR</option>
-                                <option value="USD" selected>USD</option>
-                                <option value="CAD">CAD</option>
-                                <option value="GBP">GBP</option>
-                                <option value="AUD">AUD</option>
-                                <option value="JPY">JPY</option>
-                                <option value="KWD">BHD</option>
-                                <option value="JMD">JMD</option>
-                                <option value="VES">VES</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-sm" id="AMOUNT" name="AMOUNT" value="10.17" onchange="updateHash();">
-                        </div>
-
-                        <div class="col-sm-3"><label class="form-label">Description</label></div>
-                        <div class="col-sm-9">
-                            <textarea class="form-control form-control-sm" rows="1" name="DESCRIPTION">Order description text - The Director&#39;s Cut</textarea>
-                        </div>
-
-                        <div class="col-sm-3"><label class="form-label">Auto Ready</label></div>
-                        <div class="col-sm-2">
-                            <input list="autoready" class="form-control form-control-sm" name="AUTOREADY" value="Y">
-                            <datalist id="autoready">
-                                <option value="N" />
-                                <option value="Y" />
-                            </datalist>
-                        </div>
-                        <div class="col-sm-5"><label class="form-label float-end">Bypass Surcharge</label></div>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control form-control-sm" name="BYPASS_SURCHARGE">
-                        </div>
-
-                        <div class="col-sm-3"><label for="RECEIPTPAGEURL" class="form-label">Receipt Page URL</label></div>
-                        <div class="col-sm-9">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-receipt"></i></span>
-                                <input list="receipturls" type="text" class="form-control form-control-sm" id="RECEIPTPAGEURL" name="RECEIPTPAGEURL"
-                                       value="http://simulator.wntps.com:8181/receipt" onchange="updateHash();">
-                                    <datalist id="receipturls">
-                                        <option value="http://slowpoke:8181/receipt" />
-                                        <option value="http://vagrant.wntps.com/merchant/payment/defaultHppReceipt" />
-                                        <option value="http://qawslynxwn.worldnettps.com/merchant/payment/defaultHppReceipt" />
-                                    </datalist>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3"><label for="VALIDATIONURL" class="form-label">Validation Page URL</label>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-journal-check"></i></span>
-                                <input list="bgvalidationurls" type="text" class="form-control form-control-sm" id="VALIDATIONURL" name="VALIDATIONURL" onchange="updateHash();">
-                                    <datalist id="bgvalidationurls">
-                                        <option value="http://http-dumper.wntps.com/notifications/success.py" />
-                                        <option value="https://vvd.pythonanywhere.com/validate" />
-                                    </datalist>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3"><label class="form-label">Secure Card</label></div>
-                        <div class="col-sm-5" title="MERCHANTREF">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                <input type="text" class="form-control form-control-sm" name="SECURECARDMERCHANTREF">
-                            </div>    
-                        </div>
-                        <div class="col-sm-4" title="CARDREFERENCE">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-unlock"></i></span>
-                                <input type="text" class="form-control form-control-sm" name="CARDREFERENCE">
-                            </div>    
-                        </div>
-
-                        <div class="col-sm-3"><label for="EMAIL" class="form-label">Email/Phone</label></div>
-                        <div class="col-sm-5">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input type="text" class="form-control form-control-sm" id="EMAIL" name="EMAIL" value="vvd@worldnettps.it">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                <input type="text" class="form-control" id="PHONE" name="PHONE" value="800 0005555">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="avs" class="row g-1 pt-0 pb-1 justify-content-end">
-                        <div class="col-sm-3"><label class="form-label">AVS</label><input type="checkbox" class="form-check-input float-end" id="enableAvs"></div>
-                        <div class="col-sm-4">
-                            <div class="input-group input-group-sm" title="Street">
-                                <span class="input-group-text">Address1</span>
-                                <input type="text" class="form-control form-control-sm" name="ADDRESS1" value="156 Main str.">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="City (?)">
-                                <span class="input-group-text">Address2</span>
-                                <input type="text" class="form-control form-control-sm" name="ADDRESS2" value="Dublin">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text">Zip</span>
-                                <input type="text" class="form-control form-control-sm" name="POSTCODE" value="12345">
-                            </div>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-4">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text">City</span>
-                                <input type="text" class="form-control form-control-sm" id="city" name="CITY" value="Dublin">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text">Region</span>
-                                <input type="text" class="form-control form-control-sm" name="REGION" value="Dun Laoghaire">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-sm">
-                                <span class="input-group-text">Country</span>
-                                <input type="text" class="form-control form-control-sm" name="COUNTRY" value="IE">
-                            </div>
-                        </div>
-                    </div>
-
-                <!-- Level II data -->
-                    <div id="level2Data" class="row g-1 py-1 justify-content-end">
-                        <div class="col-sm-3"><label class="form-label">Level II</label><input type="checkbox" class="form-check-input float-end" id="enableLevel2"></div>
-                        <div class="col-sm-6">
-                            <div class="input-group input-group-sm" title="CUSTOMER_REF_NUMBER">
-                                <span class="input-group-text">Customer Ref Number</span>
-                                <input type="text" class="form-control form-control-sm" name="CUSTOMER_REF_NUMBER" value="crn123">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="TAX_AMOUNT">
-                                <span class="input-group-text">Tax Amount</span>
-                                <input type="text" class="form-control form-control-sm" name="TAX_AMOUNT" value="3">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-9">
-                            <div class="input-group input-group-sm" title="SHIPPING_FULL_NAME">
-                                <span class="input-group-text">Full Name</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_FULL_NAME" value="L2 Full Name">
-                            </div>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-4">
-                            <div class="input-group input-group-sm" title="SHIPPING_ADDRESS1">
-                                <span class="input-group-text">Address1</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_ADDRESS1">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="SHIPPING_ADDRESS2">
-                                <span class="input-group-text">Address2</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_ADDRESS2">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-sm" title="SHIPPING_POSTCODE">
-                                <span class="input-group-text">Zip</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_POSTCODE" value="09876">
-                            </div>
-                        </div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-4">
-                            <div class="input-group input-group-sm" title="SHIPPING_CITY">
-                                <span class="input-group-text">City</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_CITY">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="SHIPPING_REGION">
-                                <span class="input-group-text">Region</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_REGION">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="input-group input-group-sm" title="SHIPPING_COUNTRY">
-                                <span class="input-group-text">Country</span>
-                                <input type="text" class="form-control form-control-sm" name="SHIPPING_COUNTRY">
-                            </div>
-                        </div>
-                    </div>
-
-                <!-- Level III data -->
-                    <div class="row g-1 py-1">
-                        <div class="col-sm-3"><label class="form-label">Level III/Conv Fee</label></div>
-                        <div class="col-sm-9 d-grid">
-                            <button id="addLineItem" class="btn btn-sm btn-outline-success" type="button"> + </button>
-                        </div>
-                    </div>
-
-                    <div class="row g-1 py-1 lineitem visually-hidden justify-content-end">
-                        <input type="hidden" name="itemId" value="0" disabled>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_PRODUCT_CODE" value="pcN" placeholder="Product Code" title="Product Code" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_COMMODITY_CODE" value="ccN" placeholder="Comm Code" title="Commodity Code" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_DESCRIPTION" value="descrN" placeholder="Description" title="Description" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_QUANTITY" value="N" placeholder="Quantity" title="Quantity" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_UNIT_OF_MEASURE" value="umN" placeholder="Unit of Measure" title="Unit of Measure" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_UNIT_PRICE" value="N0" placeholder="Unit Price" title="Unit Price" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_TAX_RATE" value="15" placeholder="Tax Rate" title="Tax Rate" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_DISCOUNT_RATE" value="25" placeholder="Discount Rate" title="Discount Rate" disabled>
-                        </div>
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_TOTAL_AMOUNT" value="N00" placeholder="Total" title="Total Amount" disabled>
-                        </div>
-                        <div class="col-sm-1 d-grid">
-                            <button class="btn btn-outline-danger btn-sm" type="button"> - </button>
-                        </div>
-                    </div>
-
-                    <div id="level3Data" class="row g-1 py-1 justify-content-end">
-                        <div class="col-sm-3"><input type="checkbox" class="form-check-input float-end" id="enableLevel3"></div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="TOTAL_DISCOUNT_AMOUNT">
-                                <span class="input-group-text">Discount</span>
-                                <input type="text" class="form-control form-control-sm" name="TOTAL_DISCOUNT_AMOUNT" value="4">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="TOTAL_DUTY_AMOUNT">
-                                <span class="input-group-text">Duty</span>
-                                <input type="text" class="form-control form-control-sm" name="TOTAL_DUTY_AMOUNT" value="5">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" title="TOTAL_FREIGHT_AMOUNT">
-                                <span class="input-group-text">Freight</span>
-                                <input type="text" class="form-control form-control-sm" name="TOTAL_FREIGHT_AMOUNT" value="6">
-                            </div>
-                        </div>
-                    </div>
-
-                <!-- Extra parameters -->
-                    <div class="row g-1 py-2">
-                        <div class="col-sm-3"><label class="form-label">Other Field1</label></div>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="OTHERFIELD_1" value="Other Field1">
-                        </div>
-                    </div>
-
-                </form>
+            <br />
+            <div id="iframeContainer" class="input-group input-group-sm visually-hidden" style="width:527px; !important;">
+                <span class="input-group-text" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
+                <input type="text" class="form-control form-control-sm" id="hppURLForSharing" tabindex="-1" readonly />
+                <iframe id="iframe" name="worldnet-payment" width="100%" height="700px" style="margin:0; border:1px solid #ccc; border-top:none;" 
+                        src="about:blank" allow="payment"></iframe>
             </div>
         </div>
+
+        <div class="col-md-7">
+            <form method="POST" id="awesomeForm" name="awesomeForm" target="_blank" action="">
+                <div class="row g-1 justify-content-end">
+                    <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
+                    <div class="col-sm-7">
+                        <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action=this.value;">
+                            <option value="https://vagrant.wntps.com/merchant/paymentpage" selected>https://vagrant.wntps.com/merchant/paymentpage</option>
+                            <option value="https://vagrant.wntps.com/merchant/preauthpage">https://vagrant.wntps.com/merchant/preauthpage</option>
+                            <option value="https://lpivotal.wntps.com/merchant/paymentpage">https://lpivotal.wntps.com/merchant/paymentpage</option>
+                            <option value="https://lpivotal.wntps.com/merchant/preauthpage">https://lpivotal.wntps.com/merchant/preauthpage</option>
+                            <option value="https://lnuvei.wntps.com/merchant/paymentpage">https://lnuvei.wntps.com/merchant/paymentpage</option>
+                            <option value="https://lgoepay.wntps.com/merchant/paymentpage">https://lgoepay.wntps.com/merchant/paymentpage</option>
+                            <option value="">—————————— MQA ————————————————————————</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/paymentpage">https://qalynxwn.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/preauthpage">https://qalynxwn.worldnettps.com/merchant/preauthpage</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/paymentpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/preauthpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/paymentpage">https://qawshoundwn.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/preauthpage">https://qawshoundgo.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/paymentpage">https://qawsjazzwn.worldnettps.com/merchant/paymentpage</option>
+                            <option value="">—————————— GCP ————————————————————————</option>
+                            <option value="https://qautobot.worldnettps.com/merchant/paymentpage">https://qautobot.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/paymentpage">https://vagrant.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/preauthpage">https://vagrant.worldnettps.com/merchant/preauthpage</option>
+                            <option value="https://testpayments.worldnettps.com/merchant/paymentpage">https://testpayments.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://testpayments.nuvei.com/merchant/paymentpage">https://testpayments.nuvei.com/merchant/paymentpage</option>
+                            <option value="">—————————— Prod ————————————————————————</option>
+                            <option value="https://payments.worldnettps.com/merchant/paymentpage">https://payments.worldnettps.com/merchant/paymentpage</option>
+                            <option value="https://payments.worldnettps.com/merchant/preauthpage">https://payments.worldnettps.com/merchant/preauthpage</option>
+                            <option value="https://payments.nuvei.com/merchant/paymentpage">https://payments.nuvei.com/merchant/paymentpage</option>
+                            <option value="https://payments.nuvei.com/merchant/preauthpage">https://payments.nuvei.com/merchant/preauthpage</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" title="Method (ignored for iframe)">
+                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method=this.value;">
+                            <option value="POST" selected>POST</option>
+                            <option value="GET">GET</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3"><label for="OTHERFIELD_SANDBOX" class="form-label">iSandbox tokens</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" id="enableSandbox" onchange="document.getElementById('OTHERFIELD_SANDBOX').disabled = !this.checked;" /></span>
+                            <input list="sandboxrestrictions" type="text" class="form-control form-control-sm" id="OTHERFIELD_SANDBOX" title="Blank value will apply all restrictions on embedded content" 
+                                   value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" disabled />
+                                <datalist id="sandboxrestrictions">
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts" />
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="TERMINALID" class="form-label">Terminal</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();" />
+                    </div>
+                    <div class="col-sm-2 text-start" title="Multi-Currency">
+                        <input type="checkbox" class="form-check-input" id="multicurrency" onchange="updateHash();" />
+                        <label for="multicurrency" class="form-label">MC</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-select form-select-sm" name="TERMINALTYPE" title="TERMINALTYPE">
+                            <option value="1">1 - Moto</option>
+                            <option value="2" selected>2 - Internet</option>
+                            <option value="3">3 - CHP</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input list="txntypes" type="text" class="form-control form-control-sm" name="TRANSACTIONTYPE" title="TRANSACTIONTYPE">
+                            <datalist id="txntypes">
+                                <option value="4">Normal Mail order/Telephone Order trans</option>
+                                <option value="5">3DS fully authenticated trans</option>
+                                <option value="6">3DS attempted trans</option>
+                                <option value="7">Normal eCommerce trans</option>
+                            </datalist>
+                    </div>
+
+                    <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" onchange="updateHash();" />
+                    </div>
+                    <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
+                        <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
+                        <label for="sha512" class="form-label" style="font-size:11px;">SHA<br/>512</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
+                            <span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row g-1 py-2 justify-content-end">
+                    <div class="col-sm-3"><label for="ORDERID" class="form-label">Order ID</label></div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" id="ORDERID" name="ORDERID" maxlength="20" oninput="updateHash();" />
+                            <!-- maxlength > 12 to be able to test order ids more then 12 chars in length -->
+                            <span class="input-group-text input-group-btn" onclick="orderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div>
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm" title="DATETIME">
+                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                            <input type="text" class="form-control form-control-sm" id="DATETIME" name="DATETIME" title="DATETIME" placeholder="DD-MM-YYYY:HH:MM:SS:SSS" value="01-01-2024:00:00:00:000" onchange="updateHash();">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="AMOUNT" class="form-label">Amount</label></div>
+                    <div class="col-sm-2">
+                        <select class="form-select form-select-sm" id="CURRENCY" name="CURRENCY" onchange="updateHash();">
+                            <option value="EUR">EUR</option>
+                            <option value="USD" selected>USD</option>
+                            <option value="CAD">CAD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="KWD">BHD</option>
+                            <option value="JMD">JMD</option>
+                            <option value="VES">VES</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control form-control-sm" id="AMOUNT" name="AMOUNT" value="10.17" onchange="updateHash();">
+                    </div>
+
+                    <div class="col-sm-3"><label class="form-label">Description</label></div>
+                    <div class="col-sm-9">
+                        <textarea class="form-control form-control-sm" rows="1" name="DESCRIPTION">Order description text - The Director&#39;s Cut</textarea>
+                    </div>
+
+                    <div class="col-sm-3"><label class="form-label">Auto Ready</label></div>
+                    <div class="col-sm-2">
+                        <input list="autoready" class="form-control form-control-sm" name="AUTOREADY" value="Y">
+                        <datalist id="autoready">
+                            <option value="N" />
+                            <option value="Y" />
+                        </datalist>
+                    </div>
+                    <div class="col-sm-5"><label class="form-label float-end">Bypass Surcharge</label></div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" name="BYPASS_SURCHARGE">
+                    </div>
+
+                    <div class="col-sm-3"><label for="RECEIPTPAGEURL" class="form-label">Receipt Page URL</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-receipt"></i></span>
+                            <input list="receipturls" type="text" class="form-control form-control-sm" id="RECEIPTPAGEURL" name="RECEIPTPAGEURL"
+                                   value="http://simulator.wntps.com:8181/receipt" onchange="updateHash();">
+                                <datalist id="receipturls">
+                                    <option value="http://slowpoke:8181/receipt" />
+                                    <option value="http://vagrant.wntps.com/merchant/payment/defaultHppReceipt" />
+                                    <option value="http://qawslynxwn.worldnettps.com/merchant/payment/defaultHppReceipt" />
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="VALIDATIONURL" class="form-label">Validation Page URL</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-journal-check"></i></span>
+                            <input list="bgvalidationurls" type="text" class="form-control form-control-sm" id="VALIDATIONURL" name="VALIDATIONURL" onchange="updateHash();">
+                                <datalist id="bgvalidationurls">
+                                    <option value="http://http-dumper.wntps.com/notifications/success.py" />
+                                    <option value="https://vvd.pythonanywhere.com/validate" />
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label class="form-label">Secure Card</label></div>
+                    <div class="col-sm-5" title="MERCHANTREF">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="text" class="form-control form-control-sm" name="SECURECARDMERCHANTREF">
+                        </div>    
+                    </div>
+                    <div class="col-sm-4" title="CARDREFERENCE">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-unlock"></i></span>
+                            <input type="text" class="form-control form-control-sm" name="CARDREFERENCE">
+                        </div>    
+                    </div>
+
+                    <div class="col-sm-3"><label for="EMAIL" class="form-label">Email/Phone</label></div>
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="text" class="form-control form-control-sm" id="EMAIL" name="EMAIL" value="vvd@worldnettps.it">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                            <input type="text" class="form-control" id="PHONE" name="PHONE" value="800 0005555">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="avs" class="row g-1 pt-0 pb-1 justify-content-end">
+                    <div class="col-sm-3"><label class="form-label">AVS</label><input type="checkbox" class="form-check-input float-end" id="enableAvs"></div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm" title="Street">
+                            <span class="input-group-text">Address1</span>
+                            <input type="text" class="form-control form-control-sm" name="ADDRESS1" value="156 Main str.">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="City (?)">
+                            <span class="input-group-text">Address2</span>
+                            <input type="text" class="form-control form-control-sm" name="ADDRESS2" value="Dublin">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">Zip</span>
+                            <input type="text" class="form-control form-control-sm" name="POSTCODE" value="12345">
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">City</span>
+                            <input type="text" class="form-control form-control-sm" id="city" name="CITY" value="Dublin">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">Region</span>
+                            <input type="text" class="form-control form-control-sm" name="REGION" value="Dun Laoghaire">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">Country</span>
+                            <input type="text" class="form-control form-control-sm" name="COUNTRY" value="IE">
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Level II data -->
+                <div id="level2Data" class="row g-1 py-1 justify-content-end">
+                    <div class="col-sm-3"><label class="form-label">Level II</label><input type="checkbox" class="form-check-input float-end" id="enableLevel2"></div>
+                    <div class="col-sm-6">
+                        <div class="input-group input-group-sm" title="CUSTOMER_REF_NUMBER">
+                            <span class="input-group-text">Customer Ref Number</span>
+                            <input type="text" class="form-control form-control-sm" name="CUSTOMER_REF_NUMBER" value="crn123">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="TAX_AMOUNT">
+                            <span class="input-group-text">Tax Amount</span>
+                            <input type="text" class="form-control form-control-sm" name="TAX_AMOUNT" value="3">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm" title="SHIPPING_FULL_NAME">
+                            <span class="input-group-text">Full Name</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_FULL_NAME" value="L2 Full Name">
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm" title="SHIPPING_ADDRESS1">
+                            <span class="input-group-text">Address1</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_ADDRESS1">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="SHIPPING_ADDRESS2">
+                            <span class="input-group-text">Address2</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_ADDRESS2">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group input-group-sm" title="SHIPPING_POSTCODE">
+                            <span class="input-group-text">Zip</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_POSTCODE" value="09876">
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-sm" title="SHIPPING_CITY">
+                            <span class="input-group-text">City</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_CITY">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="SHIPPING_REGION">
+                            <span class="input-group-text">Region</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_REGION">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group input-group-sm" title="SHIPPING_COUNTRY">
+                            <span class="input-group-text">Country</span>
+                            <input type="text" class="form-control form-control-sm" name="SHIPPING_COUNTRY">
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Level III data -->
+                <div class="row g-1 py-1">
+                    <div class="col-sm-3"><label class="form-label">Level III/Conv Fee</label></div>
+                    <div class="col-sm-9 d-grid">
+                        <button id="addLineItem" class="btn btn-sm btn-outline-success" type="button"> + </button>
+                    </div>
+                </div>
+
+                <div class="row g-1 py-1 lineitem visually-hidden justify-content-end">
+                    <input type="hidden" name="itemId" value="0" disabled>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_PRODUCT_CODE" value="pcN" placeholder="Product Code" title="Product Code" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_COMMODITY_CODE" value="ccN" placeholder="Comm Code" title="Commodity Code" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_DESCRIPTION" value="descrN" placeholder="Description" title="Description" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_QUANTITY" value="N" placeholder="Quantity" title="Quantity" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_UNIT_OF_MEASURE" value="umN" placeholder="Unit of Measure" title="Unit of Measure" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_UNIT_PRICE" value="N0" placeholder="Unit Price" title="Unit Price" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_TAX_RATE" value="15" placeholder="Tax Rate" title="Tax Rate" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_DISCOUNT_RATE" value="25" placeholder="Discount Rate" title="Discount Rate" disabled>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" class="form-control form-control-sm" name="LINE_ITEM_N_TOTAL_AMOUNT" value="N00" placeholder="Total" title="Total Amount" disabled>
+                    </div>
+                    <div class="col-sm-1 d-grid">
+                        <button class="btn btn-outline-danger btn-sm" type="button"> - </button>
+                    </div>
+                </div>
+
+                <div id="level3Data" class="row g-1 py-1 justify-content-end">
+                    <div class="col-sm-3"><input type="checkbox" class="form-check-input float-end" id="enableLevel3"></div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="TOTAL_DISCOUNT_AMOUNT">
+                            <span class="input-group-text">Discount</span>
+                            <input type="text" class="form-control form-control-sm" name="TOTAL_DISCOUNT_AMOUNT" value="4">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="TOTAL_DUTY_AMOUNT">
+                            <span class="input-group-text">Duty</span>
+                            <input type="text" class="form-control form-control-sm" name="TOTAL_DUTY_AMOUNT" value="5">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group input-group-sm" title="TOTAL_FREIGHT_AMOUNT">
+                            <span class="input-group-text">Freight</span>
+                            <input type="text" class="form-control form-control-sm" name="TOTAL_FREIGHT_AMOUNT" value="6">
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Extra parameters -->
+                <div class="row g-1 py-2">
+                    <div class="col-sm-3"><label class="form-label">Other Field1</label></div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" name="OTHERFIELD_1" value="Other Field1">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </main>
+</div>
 
-<!--input name="PAYMENTTYPE" type="text" value="CUP_SECUREPAY"-->
-
-<footer class="mt-auto py-2">
+<footer class="mt-auto py-3">
+    <div class="container">
         <ul class="nav justify-content-center">
             <li class="nav-item"><a href="paymentpage.html" class="nav-link px-2 link-secondary">Payments</a></li>
             <label class="nav-link px-2 link-secondary">|</label>
@@ -493,9 +498,9 @@
             <label class="nav-link px-2 link-secondary">|</label>
             <li class="nav-item"><a href="mpi.html" class="nav-link px-2 link-secondary">MPI</a></li>
         </ul>
+    </div>
 </footer>
 
-</div>
 <script>
     $(document).ready(function(){
         $('#avs input[type=text]').each(function() {  $(this).prop("disabled", true);  });

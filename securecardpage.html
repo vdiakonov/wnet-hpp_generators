@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Hosted Token Page Generator</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        html { overflow-y: scroll; }
+        .form-control-readonly { background-color: #e9ecef; pointer-events: none; }
+        .input-group-btn { cursor: pointer; }
+        :focus { box-shadow: 0 0 8px 0 rgba(13,110,253,.25) !important; }
+        .icon-48 { font-size: 48px; }
+        .icon-24 { font-size: 24px; }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="js/common.js"></script>
+    <script src="js/crypto.js"></script>
+    <script>
+        function merchantRef() {
+            document.getElementById("MERCHANTREF").value = "HST" + Math.floor(100000000 + Math.random() * 900000000);
+            //alert(Math.random().toString(36).toUpperCase().substring(2, 30));
+        }
+
+        function updateHash() {
+            //merchantRef();
+            const hashFields = [];
+
+            hashFields.push(document.getElementById("TERMINALID").value,
+                            document.getElementById("MERCHANTREF").value,
+                            document.getElementById("DATETIME").value,
+                            document.getElementById("ACTION").value,
+                            document.getElementById("TERMINALSECRET").value
+                            );
+
+            if (document.getElementById("sha512").checked) {
+                hashString = hashFields.join(":");
+                sha512(hashString).then((digestHex) => { document.getElementById("HASH").value = digestHex; });
+            } else {
+                hashString = hashFields.join("");
+                document.getElementById("HASH").value = md5(hashString);
+            }
+
+            document.getElementById("awesomeForm").action = document.getElementById("newAction").value;
+        }
+
+        document.getElementById("awesomeForm")?.addEventListener("submit", function(event) {
+            //setDateTime();
+            updateHash();
+        });
+    </script>
+</head>
+<body class="d-flex flex-column h-100 bg-light" onload="merchantRef(); setDateTime(); updateHash();">
+<div class="container">
+<header class="bg-dark bg-gradient">
+    <div class="row py-2 text-center">
+        <div class="col-1 ms-4 text-start"><a class="link-secondary" href="index.html"><i class="bi bi-house-door icon-24"></i></a></div>
+        <h4 class="col-6 my-1 text-light">Hosted Token Page Generator</h4>
+        <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
+            <a class="me-3 py-2 link-secondary text-decoration-none" href="subscriptionpage.html">Subscriptions</a>
+        </nav>
+    </div>
+</header>
+
+<main class="flex-shrink-0 pt-3">
+    <div class="row">
+        <div class="col-md-5 order-md-last">
+            <div id="iframeContainer" class="input-group input-group-sm visually-hidden" style="width:527px; !important;">
+                <span class="input-group-text" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
+                <input type="text" class="form-control form-control-sm" id="hppURLForSharing" tabindex="-1" readonly />
+                <iframe id="iframe" name="worldnet-payment" width="100%" height="700px" style="margin:0; border:1px solid #ccc; border-top:none;" 
+                        src="about:blank" allow="payment"></iframe>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <form method="POST" id="awesomeForm" name="awesomeForm" action="" target="_blank">
+                <div class="row g-1 justify-content-end">
+                    <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
+                    <div class="col-sm-7">
+                        <select id="newAction" class="form-select form-select-sm" onchange="javaScript: document.getElementById('awesomeForm').action=this.value;">
+                            <option value="https://vagrant.wntps.com/merchant/securecardpage" selected>https://vagrant.wntps.com/merchant/securecardpage</option>
+                            <option value="https://lpivotal.wntps.com/merchant/securecardpage">https://lpivotal.wntps.com/merchant/securecardpage</option>
+                            <option value="https://lnuvei.wntps.com/merchant/securecardpage">https://lnuvei.wntps.com/merchant/securecardpage</option>
+                            <option value="">—————————— MQA —————————————————————————</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/securecardpage">https://qawslynxwn.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/securecardpage">https://qawsironwn.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/securecardpage">https://qawshoundwn.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/securecardpage">https://qawsjazzwn.worldnettps.com/merchant/securecardpage</option>
+                            <option value="">—————————— GCP —————————————————————————</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/securecardpage">https://vagrant.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://testpayments.worldnettps.com/merchant/securecardpage">https://testpayments.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://testpayments.nuvei.com/merchant/securecardpage">https://testpayments.nuvei.com/merchant/securecardpage</option>
+                            <option value="">—————————— Prod —————————————————————————</option>
+                            <option value="https://payments.worldnettps.com/merchant/securecardpage">https://payments.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://payments.nuvei.com/merchant/securecardpage">https://payments.nuvei.com/merchant/securecardpage</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" title="Method (ignored for iframe)">
+                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method=this.value;">
+                            <option value="POST" selected>POST</option>
+                            <option value="GET">GET</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3"><label for="OTHERFIELD_SANDBOX" class="form-label">iSandbox tokens</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" id="enableSandbox" onchange="document.getElementById('OTHERFIELD_SANDBOX').disabled = !this.checked;" /></span>
+                            <input list="sandboxrestrictions" type="text" class="form-control form-control-sm" id="OTHERFIELD_SANDBOX" title="Blank value will apply all restrictions on embedded content" 
+                                   value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" disabled>
+                                <datalist id="sandboxrestrictions">
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts" />
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="TERMINALID" class="form-label">Terminal</label></div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();" />
+                    </div>
+
+                    <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" oninput="updateHash()" />
+                    </div>
+                    <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
+                        <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
+                        <label for="sha512" class="form-label" style="font-size:11px;">SHA<br/>512</label>
+                    </div>
+                    <div class="col-sm-5" title="Hash">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
+                            <span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise" title="Update Hash"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="MERCHANTREF" class="form-label">Merchant Ref</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" id="MERCHANTREF" name="MERCHANTREF" oninput="updateHash();" />
+                            <span class="input-group-text input-group-btn" onclick="merchantRef(); updateHash();"  title="New Merchant Ref"><i class="bi bi-arrow-clockwise"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="ACTION" class="form-label">Token Action</label></div>
+                    <div class="col-sm-9">
+                        <select class="form-select form-select-sm" id="ACTION" name="ACTION" title="ACTION" onchange="updateHash();">
+                            <option value="register" selected>register</option>
+                            <option value="update">update</option>
+                            <option value="registerAch">registerAch</option>
+                            <option value="updateAch">updateAch</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3"><label for="DATETIME" class="form-label">DateTime</label></div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="DATETIME" name="DATETIME" placeholder="DD-MM-YYYY:HH:MM:SS:SSS" value="01-01-2024:00:00:00:000" onchange="updateHash();" />
+                    </div>
+
+                    <div class="col-sm-3"><label for="EMAIL" class="form-label">Email</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" onchange="document.getElementById('EMAIL').disabled = !this.checked;" /></span>
+                            <!--span class="input-group-text"><i class="bi bi-envelope"></i></span-->
+                            <input type="text" class="form-control form-control-sm" id="EMAIL" name="EMAIL" value="vvd.hppsc@worldnettps.it" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="STOREDCREDENTIALUSE" class="form-label">Stored Credential Use</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" onchange="document.getElementById('STOREDCREDENTIALUSE').disabled = !this.checked;" /></span>
+                            <select class="form-select form-select-sm" id="STOREDCREDENTIALUSE" name="STOREDCREDENTIALUSE" disabled>
+                                <option value="" selected></option>
+                                <option value="UNSCHEDULED">Unscheduled</option>
+                                <option value="INSTALLMENT">Installment</option>
+                                <option value="RECURRING">Recurring</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="PAYMENTOPTIONS" class="form-label">Payment Options</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" id="enablePaymentOptions" onchange="document.getElementById('PAYMENTOPTIONS').disabled = !this.checked;" /></span>
+                            <select class="form-select form-select-sm" id="PAYMENTOPTIONS" name="PAYMENTOPTIONS" disabled>
+                                <option value="" selected></option>
+                                <option value="CARD">Card</option>
+                                <option value="BANK_TRANSFER">Bank Transfer</option>
+                                <option value="CARD_AND_BANK_TRANSFER">Card and Bank Transfer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 py-2"></div>
+
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9">
+                        <button class="btn btn-primary btn-md" type="submit" title="Go to HSTP">Open HSTP</button>
+                        <button class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HSTP in IFrame via GET">IFrameGET</button>
+                        <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSTP in IFrame via GET">IFramePOST</button>
+                        <button class="btn btn-secondary btn-md" type="button" onclick="merchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
+                        <button class="btn btn-outline-secondary btn-md" type="reset" onclick="resetPage();">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</div>
+
+<footer class="mt-auto py-3">
+    <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a href="paymentpage.html" class="nav-link px-2 link-secondary">Payments</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="securecardpage.html" class="nav-link px-2 link-secondary">Secure Tokens</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="subscriptionpage.html" class="nav-link px-2 link-secondary">Subscriptions</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="bulkpayments.html" class="nav-link px-2 link-secondary">Bulk Payments</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="mpi.html" class="nav-link px-2 link-secondary">MPI</a></li>
+        </ul>
+    </div>
+</footer>
+
+<!--script type='text/javascript'>
+    $(document).ready(function(){
+        $('#EMAIL').prop("disabled", true);
+        $('#STOREDCREDENTIALUSE').prop("disabled", true);
+        $('#PAYMENTOPTIONS').prop("disabled", true);
+    });
+
+    $enablePaymentOptionsElem = $('#enablePaymentOptions');
+    $enablePaymentOptionsElem.change(function(){
+        $('#PAYMENTOPTIONS').prop("disabled", !$enablePaymentOptionsElem.is(":checked"));
+    });
+</script-->
+
+<script>
+    function loadIframeGet() {
+        let form = document.getElementById("awesomeForm");
+        let search = new URLSearchParams(new FormData(form));
+        let queryString = search.toString();
+        //console.log(queryString);
+        let url = form.action + "?" + queryString + "&INIFRAME=Y";
+        document.getElementById("hppURLForSharing").value = url;
+
+        let sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
+        if (!sandboxRestrictions.disabled) {
+            iframe.setAttribute('sandbox', sandboxRestrictions.value);
+        } else {
+            iframe.removeAttribute('sandbox');
+        }
+
+        //document.getElementById("iframeContainer").style.display = "block";
+        document.getElementById("iframeContainer").classList.remove("visually-hidden");
+        document.getElementById("iframe").src = url;
+    }
+
+    function loadIframePost() {
+        //TODO: reset previously created/used iframe
+
+        // Get the form data
+        const awesomeForm = document.getElementById('awesomeForm');
+        const formData = new FormData(awesomeForm);
+        formData.append("INIFRAME", "Y");
+
+        document.getElementById("iframeContainer").classList.remove("visually-hidden");
+        document.getElementById("hppURLForSharing").value = awesomeForm.action;
+
+        // Get an iframe element
+        const iframe = document.getElementById('iframe');
+        //iframe.setAttribute('name', 'worldnet-payment');
+        iframe.src = awesomeForm.action;
+        //iframe.setAttribute('sandbox', "allow-modals allow-forms allow-popups allow-scripts");
+        //iframe.setAttribute('sandbox', "allow-modals allow-forms allow-popups allow-scripts allow-same-origin");
+        const sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
+        if (!sandboxRestrictions.disabled) {
+            iframe.setAttribute('sandbox', sandboxRestrictions.value);
+            //iframe.sandbox = sandboxRestrictions.value;
+        } else {
+            iframe.removeAttribute('sandbox');
+        }
+        
+        // Create a form inside the iframe document to submit the payment request
+        const iframeForm = document.createElement('form');
+        iframeForm.setAttribute('method', 'POST');
+        iframeForm.setAttribute('action', awesomeForm.action);
+        iframeForm.setAttribute('target', 'worldnet-payment');
+
+        // Append the form data as hidden inputs inside the iframe form
+        formData.forEach(function(value, key) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            iframeForm.appendChild(input);
+        });
+
+        // Append the iframe form to the iframe body and submit it
+        iframe.contentWindow.document.body.appendChild(iframeForm);
+        iframeForm.submit();
+    }
+
+    function resetPage() {
+        //document.getElementById("iframeContainer").style.display = "none";
+        //document.getElementById("iframeContainer").classList.add("visually-hidden");
+        //document.getElementById("hppURLForSharing").value = "";
+        //document.getElementById("hppiframe").src = "about:blank";
+
+        location.reload();
+    }
+
+    function copyUrlToClipboard() {
+        let url = document.getElementById("hppURLForSharing");
+        navigator.clipboard.writeText(url.value);
+    }
+
+    function getDateTimeFormatted() {
+        let now = new Date();
+
+        let day = String(now.getDate()).padStart(2, '0');
+        let month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        let year = now.getFullYear();
+
+        let hours = String(now.getHours()).padStart(2, '0');
+        let minutes = String(now.getMinutes()).padStart(2, '0');
+        let seconds = String(now.getSeconds()).padStart(2, '0');
+        let milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+        return `${day}-${month}-${year}:${hours}:${minutes}:${seconds}:${milliseconds}`;
+    }
+
+    function setDateTime() {
+        let formattedDateTime = getDateTimeFormatted();
+        document.getElementById("DATETIME").value = formattedDateTime;
+    }
+</script>
+
+</body>
+</html>
