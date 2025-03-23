@@ -15,7 +15,7 @@ Supported functionalities include:
 - GET and POST requests
 - embedding a page inside an iframe with GET and POST methods
   - optional `sandbox` attribute with configurable tokens to lift particular restrictions on embedded content
-- Additional Nettraxion features:
+- Various Nettraxion features such as
   - Payments and Pre-Authorizations
   - Ecom, MoTo, and CHP transaction types
   - AVS (Address Verification System) Data
@@ -27,13 +27,12 @@ Supported functionalities include:
 
 ## Usage Instructions
 
-1. Open the desired helper page (e.g., Payments Page).
+1. Open the desired helper page (e.g., Payments Page, Secure Tokens Page).
 2. Fill in the required fields in the form provided.
 3. Submit the form to generate and test the hosted page.
 
 ## Notes
 
 - For more information on Hosted Pages, Nettraxion features and configuration options, refer to the following resources:
-  - [Hosted Pages Integration Documentation](https://developers.worldnetpayments.com/hosted_pages:introduction)
-  - [Payroc Gateway Confluence Space](https://payroc.atlassian.net/wiki/spaces/wn/overview?homepageId=2227798790)
-
+  - [Hosted Pages Documentation](https://developers.worldnetpayments.com/hosted_pages:introduction)
+  - [Integration Guides](https://developers.worldnetpayments.com/selfcare:introduction)

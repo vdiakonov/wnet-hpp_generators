@@ -11,19 +11,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         a:hover {color: #ff6900; }  /* 0051c2 */
+        :focus { box-shadow: 0 0 8px 0 rgba(255,140,0,.25) !important; }
         .container { max-width: 960px; }
-        .icon-48 { font-size: 48px; }
-        .icon-24 { font-size: 24px; }
+        .bi-size-48 { font-size: 48px; }
+        .bi-size-24 { font-size: 24px; }
         .bi-bold { -webkit-text-stroke: 1px; }
         .fs-md { font-size: 1em; }
         .fs-sm { font-size: 0.875em; }
+        .custom-tooltip { --bs-tooltip-bg: #fc0; --bs-tooltip-color: #212529; --bs-tooltip-font-size: 1em; --bs-tooltip-max-width: auto; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body class="bg-light">
 <div class="container">
   <header class="bg-dark bg-gradient">
-    <div class="d-flex flex-column flex-md-row py-1 align-items-center border-bottom">
-      <img class="ms-3" src="https://partners.payroc.com/hubfs/payroc-logo-white-01.png" alt="" width="64px">
+    <div class="d-flex flex-column flex-md-row py-2 align-items-center border-bottom">
+      <img class="ms-3" src="https://partners.payroc.com/hubfs/payroc-logo-white-01.png" alt="" height="40px">
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
         <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
@@ -41,7 +44,7 @@
       <div class="col">
         <div class="card rounded-3 shadow-sm">
           <a href="paymentpage.html" class="card-body text-decoration-none">
-            <i class="bi bi-cart3 icon-48"></i>
+            <i class="bi bi-cart3 bi-size-48"></i>
             <h4>Payments Page</h4>
             <p class="m-0">Process Card and Bank Transfer payments</p>
           </a>
@@ -50,7 +53,7 @@
       <div class="col">
         <div class="card rounded-3 shadow-sm">
           <a href="securecardpage.html" class="card-body text-decoration-none">
-            <i class="bi bi-credit-card icon-48"></i>
+            <i class="bi bi-credit-card bi-size-48"></i>
             <h4>Secure Tokens</h4>
             <p class="m-0">Store card details to charge your customers later</p>
           </a>
@@ -59,7 +62,7 @@
       <div class="col">
         <div class="card rounded-3 shadow-sm">
           <a href="subscriptionpage.html" class="card-body text-decoration-none">
-            <i class="bi bi-infinity icon-48 bi-bold"></i> <!-- bi-file-earmark-bar-graph-->
+            <i class="bi bi-infinity bi-size-48 bi-bold"></i> <!-- bi-file-earmark-bar-graph-->
             <h4>Subscriptions</h4>
             <p class="m-0">Collect recurring payments hassle-free</p>
           </a>
@@ -71,7 +74,7 @@
       <div class="col-4">
         <div class="card rounded-3 h-auto shadow-sm">
           <a href="bulkpayments.html" class="card-body text-decoration-none">
-            <i class="bi bi-list-columns icon-24"></i>
+            <i class="bi bi-list-columns bi-size-24"></i>
             <h5>Bulk Payments</h5>
             <p class="fs-sm m-0">Upload CSV file with transactions</p>
           </a>
@@ -80,7 +83,7 @@
       <div class="col-4">
         <div class="card rounded-3 h-auto shadow-sm">
           <a href="mpi.html" class="card-body text-decoration-none">
-            <i class="bi bi-shield icon-24"></i>
+            <i class="bi bi-shield bi-size-24"></i>
             <h5>MPI</h5>
             <p class="fs-sm m-0">3D Secure and SCA</p>
           </a>
@@ -89,7 +92,7 @@
     </div>
 
     <div class="row m-4 p-2 border rounded-pill justify-content-center text-center"> 
-        <p class="fs-sm m-0 text-secondary"><i class="me-2 bi bi-info-circle"></i>What You Can Do: Send GET and POST requests, embed a page inside an iframe with GET and POST methods, use an optional iframe's sandbox attribute with configurable tokens, access various Nettraxion capabilities such as MD5 or SHA-512 hashing, Ecom/Moto/CHP transaction types, AVS, DCC, Level 2 and Level 3 data, Tokenization, Background validation, and more.</p>
+        <p class="fs-sm m-0 text-secondary"><i class="me-2 bi bi-info-circle"></i>What You Can Do: Send GET and POST requests, embed a page inside an iframe with GET and POST methods, use an optional iframe's sandbox attribute with configurable tokens, access various Nettraxion capabilities such as MD5 or SHA-512 hashing, Ecom/Moto/CHP transaction types, 3D Secure, AVS, Enhanced Data, Tokenization, Background validation, and more.</p>
     </div>
   </main>
 
@@ -120,12 +123,19 @@
       <div class="col-6 col-md">
         <h5>About</h5>
         <ul class="list-unstyled text-small">
-          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#" title="Use on your own risk">Terms</a></li>
+          <li class="mb-1"><a class="link-secondary text-decoration-none" href="#" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true" data-bs-custom-class="custom-tooltip alert alert-warning" data-bs-title="<i class='bi bi-exclamation-triangle'></i> This play area is used at your own risk&nbsp; <img src='images/homer_disappearing.gif' width='36px' class='rounded'>">Terms</a></li>
         </ul>
       </div>
     </div>
   </footer>
 </div>
+
+<script>
+  window.addEventListener('load', () => {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  });
+</script>
 
 </body>
 </html>

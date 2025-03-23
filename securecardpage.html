@@ -11,13 +11,12 @@
     <style>
         html { overflow-y: scroll; }
         .form-control-readonly { background-color: #e9ecef; pointer-events: none; }
-        .input-group-btn { cursor: pointer; }
+        .input-group-btn { cursor: pointer; background-color: #f8f9fa;}
         :focus { box-shadow: 0 0 8px 0 rgba(13,110,253,.25) !important; }
-        .icon-48 { font-size: 48px; }
-        .icon-24 { font-size: 24px; }
+        .bi-size-48 { font-size: 48px; }
+        .bi-size-24 { font-size: 24px; }
     </style>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script src="js/common.js"></script>
     <script src="js/crypto.js"></script>
     <script>
@@ -58,7 +57,7 @@
 <div class="container">
 <header class="bg-dark bg-gradient">
     <div class="row py-2 text-center">
-        <div class="col-1 ms-4 text-start"><a class="link-secondary" href="index.html"><i class="bi bi-house-door icon-24"></i></a></div>
+        <div class="col-1 ms-4 text-start"><a class="link-secondary" href="index.html"><i class="bi bi-house-door bi-size-24"></i></a></div>
         <h4 class="col-6 my-1 text-light">Hosted Token Page Generator</h4>
         <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
             <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
@@ -72,10 +71,8 @@
     <div class="row">
         <div class="col-md-5 order-md-last">
             <div id="iframeContainer" class="input-group input-group-sm visually-hidden" style="width:527px; !important;">
-                <span class="input-group-text" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
+                <span class="input-group-text input-group-btn" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
                 <input type="text" class="form-control form-control-sm" id="hppURLForSharing" tabindex="-1" readonly />
-                <iframe id="iframe" name="worldnet-payment" width="100%" height="700px" style="margin:0; border:1px solid #ccc; border-top:none;" 
-                        src="about:blank" allow="payment"></iframe>
             </div>
         </div>
 
@@ -89,13 +86,14 @@
                             <option value="https://lpivotal.wntps.com/merchant/securecardpage">https://lpivotal.wntps.com/merchant/securecardpage</option>
                             <option value="https://lnuvei.wntps.com/merchant/securecardpage">https://lnuvei.wntps.com/merchant/securecardpage</option>
                             <option value="">—————————— MQA —————————————————————————</option>
-                            <option value="https://qawslynxwn.worldnettps.com/merchant/securecardpage">https://qawslynxwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://qawsironwn.worldnettps.com/merchant/securecardpage">https://qawsironwn.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/securecardpage">https://qawslynxwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://qawshoundwn.worldnettps.com/merchant/securecardpage">https://qawshoundwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/securecardpage">https://qawsjazzwn.worldnettps.com/merchant/securecardpage</option>
-                            <option value="">—————————— GCP —————————————————————————</option>
                             <option value="https://vagrant.worldnettps.com/merchant/securecardpage">https://vagrant.worldnettps.com/merchant/securecardpage</option>
+                            <option value="">—————————— UAT —————————————————————————</option>
                             <option value="https://testpayments.worldnettps.com/merchant/securecardpage">https://testpayments.worldnettps.com/merchant/securecardpage</option>
+                            <option value="https://payments.uat.payroc.com/merchant/securecardpage">https://payments.uat.payroc.com/merchant/securecardpage</option>
                             <option value="https://testpayments.nuvei.com/merchant/securecardpage">https://testpayments.nuvei.com/merchant/securecardpage</option>
                             <option value="">—————————— Prod —————————————————————————</option>
                             <option value="https://payments.worldnettps.com/merchant/securecardpage">https://payments.worldnettps.com/merchant/securecardpage</option>
@@ -138,7 +136,7 @@
                     <div class="col-sm-5" title="Hash">
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
-                            <span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise" title="Update Hash"></i></span>
+                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise" title="Update Hash"></i></span-->
                         </div>
                     </div>
 
@@ -155,8 +153,8 @@
                         <select class="form-select form-select-sm" id="ACTION" name="ACTION" title="ACTION" onchange="updateHash();">
                             <option value="register" selected>register</option>
                             <option value="update">update</option>
-                            <option value="registerAch">registerAch</option>
-                            <option value="updateAch">updateAch</option>
+                            <option value="registerAch">registerAch &nbsp; * ʳᵉˡᵃᵗᵉˢ ᵗᵒ ᴬᶜʰ ᴶᵃᶜᵏ ᴴᵉⁿʳʸ</option> <!-- &#691;&#7497;&#737;&#7491;&#7511;&#7497;&#738;&#32;&#7511;&#7506;&#32;&#7468;&#7580;&#688;&#32;&#7478;&#7491;&#7580;&#7503;&#32;&#7476;&#7497;&#8319;&#691;&#696; -->
+                            <option value="updateAch">updateAch &nbsp; * ʳᵉˡᵃᵗᵉˢ ᵗᵒ ᴬᶜʰ ᴶᵃᶜᵏ ᴴᵉⁿʳʸ</option>
                         </select>
                     </div>
 
@@ -206,7 +204,7 @@
                     <div class="col-sm-9">
                         <button class="btn btn-primary btn-md" type="submit" title="Go to HSTP">Open HSTP</button>
                         <button class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HSTP in IFrame via GET">IFrameGET</button>
-                        <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSTP in IFrame via GET">IFramePOST</button>
+                        <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSTP in IFrame via POST">IFramePOST</button>
                         <button class="btn btn-secondary btn-md" type="button" onclick="merchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
                         <button class="btn btn-outline-secondary btn-md" type="reset" onclick="resetPage();">Reset</button>
                     </div>
@@ -217,7 +215,7 @@
 </main>
 </div>
 
-<footer class="mt-auto py-3">
+<footer class="mt-auto pb-3">
     <div class="container">
         <ul class="nav justify-content-center">
             <li class="nav-item"><a href="paymentpage.html" class="nav-link px-2 link-secondary">Payments</a></li>
@@ -233,70 +231,64 @@
     </div>
 </footer>
 
-<!--script type='text/javascript'>
-    $(document).ready(function(){
-        $('#EMAIL').prop("disabled", true);
-        $('#STOREDCREDENTIALUSE').prop("disabled", true);
-        $('#PAYMENTOPTIONS').prop("disabled", true);
-    });
-
-    $enablePaymentOptionsElem = $('#enablePaymentOptions');
-    $enablePaymentOptionsElem.change(function(){
-        $('#PAYMENTOPTIONS').prop("disabled", !$enablePaymentOptionsElem.is(":checked"));
-    });
-</script-->
-
 <script>
-    function loadIframeGet() {
-        let form = document.getElementById("awesomeForm");
-        let search = new URLSearchParams(new FormData(form));
-        let queryString = search.toString();
-        //console.log(queryString);
-        let url = form.action + "?" + queryString + "&INIFRAME=Y";
-        document.getElementById("hppURLForSharing").value = url;
+    function createIframe() {
+        const iframeContainer = document.getElementById('iframeContainer');
+        iframeContainer.classList.remove("visually-hidden");
+        //iframeContainer.style.display = "block";
 
-        let sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
+        // Remove any existing iframes within the iframeContainer
+        Array.from(iframeContainer.children).forEach((child) => {
+            if (child.tagName === 'IFRAME') {
+                iframeContainer.removeChild(child);
+            }
+        });
+
+        // Create an iframe element
+        const iframe = document.createElement('iframe');
+        iframe.name = 'worldnet-payment';
+        iframe.allow = 'payment';
+        iframe.style = 'width:100%; height:700px; margin:0; border:1px solid #ccc; border-top:none;';
+        iframe.src = awesomeForm.action;
+        const sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
         if (!sandboxRestrictions.disabled) {
-            iframe.setAttribute('sandbox', sandboxRestrictions.value);
+            iframe.sandbox = sandboxRestrictions.value;
         } else {
             iframe.removeAttribute('sandbox');
         }
+        iframeContainer.appendChild(iframe);
 
-        //document.getElementById("iframeContainer").style.display = "block";
-        document.getElementById("iframeContainer").classList.remove("visually-hidden");
-        document.getElementById("iframe").src = url;
+        return iframe;
+    }
+
+    function loadIframeGet() {
+        const awesomeForm = document.getElementById("awesomeForm");
+        const search = new URLSearchParams(new FormData(awesomeForm));
+        const queryString = search.toString();
+        //console.log(queryString);
+        const url = awesomeForm.action + "?" + queryString + "&INIFRAME=Y";
+        document.getElementById("hppURLForSharing").value = url;
+
+        const iframe = createIframe();
+        iframe.src = url;
     }
 
     function loadIframePost() {
-        //TODO: reset previously created/used iframe
-
         // Get the form data
         const awesomeForm = document.getElementById('awesomeForm');
         const formData = new FormData(awesomeForm);
         formData.append("INIFRAME", "Y");
 
-        document.getElementById("iframeContainer").classList.remove("visually-hidden");
+        // Create an iframe element
+        const iframe = createIframe();
+        //iframe.src = awesomeForm.action;
         document.getElementById("hppURLForSharing").value = awesomeForm.action;
-
-        // Get an iframe element
-        const iframe = document.getElementById('iframe');
-        //iframe.setAttribute('name', 'worldnet-payment');
-        iframe.src = awesomeForm.action;
-        //iframe.setAttribute('sandbox', "allow-modals allow-forms allow-popups allow-scripts");
-        //iframe.setAttribute('sandbox', "allow-modals allow-forms allow-popups allow-scripts allow-same-origin");
-        const sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
-        if (!sandboxRestrictions.disabled) {
-            iframe.setAttribute('sandbox', sandboxRestrictions.value);
-            //iframe.sandbox = sandboxRestrictions.value;
-        } else {
-            iframe.removeAttribute('sandbox');
-        }
         
         // Create a form inside the iframe document to submit the payment request
         const iframeForm = document.createElement('form');
-        iframeForm.setAttribute('method', 'POST');
-        iframeForm.setAttribute('action', awesomeForm.action);
-        iframeForm.setAttribute('target', 'worldnet-payment');
+        iframeForm.method = 'POST';
+        iframeForm.action = awesomeForm.action;
+        iframeForm.target = 'worldnet-payment';
 
         // Append the form data as hidden inputs inside the iframe form
         formData.forEach(function(value, key) {
@@ -313,36 +305,36 @@
     }
 
     function resetPage() {
-        //document.getElementById("iframeContainer").style.display = "none";
-        //document.getElementById("iframeContainer").classList.add("visually-hidden");
+        //document.getElementById("iframe").style.display = "none";
+        //document.getElementById("iframe").classList.add("visually-hidden");
         //document.getElementById("hppURLForSharing").value = "";
-        //document.getElementById("hppiframe").src = "about:blank";
+        //document.getElementById("iframe").src = "about:blank";
 
         location.reload();
     }
 
     function copyUrlToClipboard() {
-        let url = document.getElementById("hppURLForSharing");
+        const url = document.getElementById("hppURLForSharing");
         navigator.clipboard.writeText(url.value);
     }
 
     function getDateTimeFormatted() {
-        let now = new Date();
+        const now = new Date();
 
-        let day = String(now.getDate()).padStart(2, '0');
-        let month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-        let year = now.getFullYear();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = now.getFullYear();
 
-        let hours = String(now.getHours()).padStart(2, '0');
-        let minutes = String(now.getMinutes()).padStart(2, '0');
-        let seconds = String(now.getSeconds()).padStart(2, '0');
-        let milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
 
         return `${day}-${month}-${year}:${hours}:${minutes}:${seconds}:${milliseconds}`;
     }
 
     function setDateTime() {
-        let formattedDateTime = getDateTimeFormatted();
+        const formattedDateTime = getDateTimeFormatted();
         document.getElementById("DATETIME").value = formattedDateTime;
     }
 </script>
