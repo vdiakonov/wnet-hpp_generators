@@ -34,5 +34,6 @@ Supported functionalities include:
 ## Notes
 
 - For more information on Hosted Pages, Nettraxion features and configuration options, refer to the following resources:
-  - [Hosted Pages Documentation](https://developers.worldnetpayments.com/hosted_pages:introduction)
+  - [Hosted Pages Specification](https://developers.worldnetpayments.com/hosted_pages:introduction)
   - [Integration Guides](https://developers.worldnetpayments.com/selfcare:introduction)
+  - [Payroc Gateway Knowledge Base](https://payroc.atlassian.net/wiki/x/AYBRhQ)

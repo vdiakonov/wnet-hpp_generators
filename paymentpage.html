@@ -21,13 +21,13 @@
     <script src="js/common.js"></script>
     <script src="js/crypto.js"></script>
     <script>
-        function orderId() {
+        function newOrderId() {
             document.getElementById("ORDERID").value = "HPP" + Math.floor(100000000 + Math.random() * 900000000);
             //alert(Math.random().toString(36).toUpperCase().substring(2, 30));
         }
 
         function updateHash() {
-            //orderId();
+            //newOrderId();
             const hashFields = [];
 
             hashFields.push(document.getElementById("TERMINALID").value,
@@ -67,7 +67,7 @@
         });
     </script>
 </head>
-<body class="d-flex flex-column h-100 bg-light" onload="orderId(); setDateTime(); updateHash();">
+<body class="d-flex flex-column h-100 bg-light" onload="newOrderId(); setDateTime(); updateHash();">
 <div class="container">
 <header class="bg-dark bg-gradient">
     <div class="row py-2 text-center">
@@ -88,7 +88,7 @@
                 <button form="awesomeForm" class="btn btn-primary btn-md" type="submit" title="Go to HPP">Open HPP</button>
                 <button form="awesomeForm" class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HPP in IFrame via GET">IFrameGET</button>
                 <button form="awesomeForm" class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HPP in IFrame via POST">IFramePOST</button>
-                <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="orderId(); updateHash();">New OrderID</button>
+                <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="newOrderId(); updateHash();">New OrderID</button>
                 <button form="awesomeForm" class="btn btn-outline-secondary btn-md" type="button" onclick="resetPage();">Reset</button>
             </div>
 
@@ -99,17 +99,17 @@
         </div>
 
         <div class="col-md-7">
-            <form method="POST" id="awesomeForm" name="awesomeForm" target="_blank" action="">
+            <form method="GET" id="awesomeForm" name="awesomeForm" target="_blank" action="">
                 <div class="row g-1 justify-content-end">
                     <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
                     <div class="col-sm-7">
-                        <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action=this.value;">
+                        <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
                             <option value="https://vagrant.wntps.com/merchant/paymentpage" selected>https://vagrant.wntps.com/merchant/paymentpage</option>
                             <option value="https://vagrant.wntps.com/merchant/preauthpage">https://vagrant.wntps.com/merchant/preauthpage</option>
                             <option value="https://lpivotal.wntps.com/merchant/paymentpage">https://lpivotal.wntps.com/merchant/paymentpage</option>
                             <option value="https://lnuvei.wntps.com/merchant/paymentpage">https://lnuvei.wntps.com/merchant/paymentpage</option>
                             <option value="https://lnuvei.wntps.com/merchant/preauthpage">https://lnuvei.wntps.com/merchant/preauthpage</option>
-                            <option value="">—————————— MQA ————————————————————————</option>
+                            <option value="">—————————— MQA —————————————————————————</option>
                             <option value="https://qawsironwn.worldnettps.com/merchant/paymentpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
                             <option value="https://qawsironwn.worldnettps.com/merchant/preauthpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
                             <option value="https://qawslynxwn.worldnettps.com/merchant/paymentpage">https://qalynxwn.worldnettps.com/merchant/paymentpage</option>
@@ -118,11 +118,11 @@
                             <option value="https://qawshoundwn.worldnettps.com/merchant/preauthpage">https://qawshoundwn.worldnettps.com/merchant/preauthpage</option>
                             <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/paymentpage">https://qawsjazzwn.worldnettps.com/merchant/paymentpage</option>
                             <option value="https://vagrant.worldnettps.com/merchant/paymentpage">https://vagrant.worldnettps.com/merchant/paymentpage</option>
-                            <option value="">—————————— UAT ————————————————————————</option>
+                            <option value="">—————————— UAT —————————————————————————</option>
                             <option value="https://testpayments.worldnettps.com/merchant/paymentpage">https://testpayments.worldnettps.com/merchant/paymentpage</option>
                             <option value="https://payments.uat.payroc.com/merchant/paymentpage">https://payments.uat.payroc.com/merchant/paymentpage</option>
                             <option value="https://testpayments.nuvei.com/merchant/paymentpage">https://testpayments.nuvei.com/merchant/paymentpage</option>
-                            <option value="">—————————— Prod ————————————————————————</option>
+                            <option value="">—————————— Prod —————————————————————————</option>
                             <option value="https://payments.worldnettps.com/merchant/paymentpage">https://payments.worldnettps.com/merchant/paymentpage</option>
                             <option value="https://payments.worldnettps.com/merchant/preauthpage">https://payments.worldnettps.com/merchant/preauthpage</option>
                             <option value="https://payments.nuvei.com/merchant/paymentpage">https://payments.nuvei.com/merchant/paymentpage</option>
@@ -130,9 +130,9 @@
                         </select>
                     </div>
                     <div class="col-sm-2" title="Method (ignored for iframe)">
-                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method=this.value;">
-                            <option value="POST" selected>POST</option>
-                            <option value="GET">GET</option>
+                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method = this.value;">
+                            <option value="GET" selected>GET</option>
+                            <option value="POST">POST</option>
                         </select>
                     </div>
 
@@ -197,7 +197,7 @@
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control form-control-sm" id="ORDERID" name="ORDERID" maxlength="20" oninput="updateHash();" />
                             <!-- maxlength > 12 to be able to test order ids more then 12 chars in length -->
-                            <span class="input-group-text input-group-btn" onclick="orderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
+                            <span class="input-group-text input-group-btn" onclick="newOrderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
                         </div>
                     </div>
                     <div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div>
@@ -217,7 +217,8 @@
                             <option value="GBP">GBP</option>
                             <option value="AUD">AUD</option>
                             <option value="JPY">JPY</option>
-                            <option value="KWD">BHD</option>
+                            <option value="BHD">BHD</option>
+                            <option value="KWD">KWD</option>
                             <option value="JMD">JMD</option>
                             <option value="VES">VES</option>
                         </select>
@@ -621,8 +622,8 @@
     }
 
     function resetPage() {
-        //document.getElementById("iframe").style.display = "none";
-        //document.getElementById("iframe").classList.add("visually-hidden");
+        //document.getElementById("iframeContainer").style.display = "none";
+        //document.getElementById("iframeContainer").classList.add("visually-hidden");
         //document.getElementById("hppURLForSharing").value = "";
         //document.getElementById("iframe").src = "about:blank";
 

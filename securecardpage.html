@@ -20,13 +20,13 @@
     <script src="js/common.js"></script>
     <script src="js/crypto.js"></script>
     <script>
-        function merchantRef() {
+        function newMerchantRef() {
             document.getElementById("MERCHANTREF").value = "HST" + Math.floor(100000000 + Math.random() * 900000000);
             //alert(Math.random().toString(36).toUpperCase().substring(2, 30));
         }
 
         function updateHash() {
-            //merchantRef();
+            //newMerchantRef();
             const hashFields = [];
 
             hashFields.push(document.getElementById("TERMINALID").value,
@@ -53,7 +53,7 @@
         });
     </script>
 </head>
-<body class="d-flex flex-column h-100 bg-light" onload="merchantRef(); setDateTime(); updateHash();">
+<body class="d-flex flex-column h-100 bg-light" onload="newMerchantRef(); setDateTime(); updateHash();">
 <div class="container">
 <header class="bg-dark bg-gradient">
     <div class="row py-2 text-center">
@@ -77,33 +77,33 @@
         </div>
 
         <div class="col-md-7">
-            <form method="POST" id="awesomeForm" name="awesomeForm" action="" target="_blank">
+            <form method="GET" id="awesomeForm" name="awesomeForm" target="_blank" action="">
                 <div class="row g-1 justify-content-end">
                     <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
                     <div class="col-sm-7">
-                        <select id="newAction" class="form-select form-select-sm" onchange="javaScript: document.getElementById('awesomeForm').action=this.value;">
+                        <select id="newAction" class="form-select form-select-sm" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
                             <option value="https://vagrant.wntps.com/merchant/securecardpage" selected>https://vagrant.wntps.com/merchant/securecardpage</option>
                             <option value="https://lpivotal.wntps.com/merchant/securecardpage">https://lpivotal.wntps.com/merchant/securecardpage</option>
                             <option value="https://lnuvei.wntps.com/merchant/securecardpage">https://lnuvei.wntps.com/merchant/securecardpage</option>
-                            <option value="">—————————— MQA —————————————————————————</option>
+                            <option value="">—————————— MQA ——————————————————————————</option>
                             <option value="https://qawsironwn.worldnettps.com/merchant/securecardpage">https://qawsironwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://qawslynxwn.worldnettps.com/merchant/securecardpage">https://qawslynxwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://qawshoundwn.worldnettps.com/merchant/securecardpage">https://qawshoundwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/securecardpage">https://qawsjazzwn.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://vagrant.worldnettps.com/merchant/securecardpage">https://vagrant.worldnettps.com/merchant/securecardpage</option>
-                            <option value="">—————————— UAT —————————————————————————</option>
+                            <option value="">—————————— UAT ——————————————————————————</option>
                             <option value="https://testpayments.worldnettps.com/merchant/securecardpage">https://testpayments.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://payments.uat.payroc.com/merchant/securecardpage">https://payments.uat.payroc.com/merchant/securecardpage</option>
                             <option value="https://testpayments.nuvei.com/merchant/securecardpage">https://testpayments.nuvei.com/merchant/securecardpage</option>
-                            <option value="">—————————— Prod —————————————————————————</option>
+                            <option value="">—————————— Prod ——————————————————————————</option>
                             <option value="https://payments.worldnettps.com/merchant/securecardpage">https://payments.worldnettps.com/merchant/securecardpage</option>
                             <option value="https://payments.nuvei.com/merchant/securecardpage">https://payments.nuvei.com/merchant/securecardpage</option>
                         </select>
                     </div>
                     <div class="col-sm-2" title="Method (ignored for iframe)">
-                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method=this.value;">
-                            <option value="POST" selected>POST</option>
-                            <option value="GET">GET</option>
+                        <select class="form-select form-select-sm" id="newMethod" onchange="javaScript: document.getElementById('awesomeForm').method = this.value;">
+                            <option value="GET" selected>GET</option>
+                            <option value="POST">POST</option>
                         </select>
                     </div>
 
@@ -144,7 +144,7 @@
                     <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control form-control-sm" id="MERCHANTREF" name="MERCHANTREF" oninput="updateHash();" />
-                            <span class="input-group-text input-group-btn" onclick="merchantRef(); updateHash();"  title="New Merchant Ref"><i class="bi bi-arrow-clockwise"></i></span>
+                            <span class="input-group-text input-group-btn" onclick="newMerchantRef(); updateHash();"  title="New Merchant Ref"><i class="bi bi-arrow-clockwise"></i></span>
                         </div>
                     </div>
 
@@ -172,15 +172,16 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3"><label for="STOREDCREDENTIALUSE" class="form-label">Stored Credential Use</label></div>
+                    <div class="col-sm-3"><label for="STOREDCREDENTIALUSE" class="form-label">Stored Credentials Use</label></div>
                     <div class="col-sm-9">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" onchange="document.getElementById('STOREDCREDENTIALUSE').disabled = !this.checked;" /></span>
                             <select class="form-select form-select-sm" id="STOREDCREDENTIALUSE" name="STOREDCREDENTIALUSE" disabled>
-                                <option value="" selected></option>
                                 <option value="UNSCHEDULED">Unscheduled</option>
                                 <option value="INSTALLMENT">Installment</option>
                                 <option value="RECURRING">Recurring</option>
+                                <option value="INVALID">Invalid</option>
+                                <option value="">Empty</option>
                             </select>
                         </div>
                     </div>
@@ -190,10 +191,11 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text"><input type="checkbox" class="form-check-input float-end" id="enablePaymentOptions" onchange="document.getElementById('PAYMENTOPTIONS').disabled = !this.checked;" /></span>
                             <select class="form-select form-select-sm" id="PAYMENTOPTIONS" name="PAYMENTOPTIONS" disabled>
-                                <option value="" selected></option>
                                 <option value="CARD">Card</option>
                                 <option value="BANK_TRANSFER">Bank Transfer</option>
                                 <option value="CARD_AND_BANK_TRANSFER">Card and Bank Transfer</option>
+                                <option value="INVALID">Invalid</option>
+                                <option value="">Empty</option>
                             </select>
                         </div>
                     </div>
@@ -205,7 +207,7 @@
                         <button class="btn btn-primary btn-md" type="submit" title="Go to HSTP">Open HSTP</button>
                         <button class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HSTP in IFrame via GET">IFrameGET</button>
                         <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSTP in IFrame via POST">IFramePOST</button>
-                        <button class="btn btn-secondary btn-md" type="button" onclick="merchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
+                        <button class="btn btn-secondary btn-md" type="button" onclick="newMerchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
                         <button class="btn btn-outline-secondary btn-md" type="reset" onclick="resetPage();">Reset</button>
                     </div>
                 </div>
@@ -305,8 +307,8 @@
     }
 
     function resetPage() {
-        //document.getElementById("iframe").style.display = "none";
-        //document.getElementById("iframe").classList.add("visually-hidden");
+        //document.getElementById("iframeContainer").style.display = "none";
+        //document.getElementById("iframeContainer").classList.add("visually-hidden");
         //document.getElementById("hppURLForSharing").value = "";
         //document.getElementById("iframe").src = "about:blank";
 
