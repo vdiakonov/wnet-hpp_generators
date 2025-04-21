@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Hosted Payment Page Generator</title>
+    <title>Hosted Subscription Page Generator</title>
     <link rel="shortcut icon" href="images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -17,16 +17,17 @@
         .bi-size-24 { font-size: 24px; }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script src="js/common.js"></script>
     <script src="js/crypto.js"></script>
 </head>
-<body class="d-flex flex-column h-100 bg-light" onload="newOrderId(); setDateTime(); updateHash();">
+<body class="d-flex flex-column h-100 bg-light" onload="newMerchantRef(); setDateTime(); setSubscriptionStartEndDates(); updateHash();">
 <header class="bg-dark bg-gradient">
     <div class="container">
         <div class="row py-2 text-center">
             <div class="col-1 text-start"><a class="link-secondary pe-2" href="index.html"><i class="bi bi-house-door-fill bi-size-24"></i></a></div>
-            <h4 class="col-6 my-1 text-light">Hosted Payment Page Generator</h4>
+            <h4 class="col-6 my-1 text-light">Hosted Subscription Page Generator</h4>
             <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
                 <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
                 <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
@@ -43,10 +44,10 @@
     <div class="row">
         <div class="col-md-5 order-md-last">
             <div class="sticky-top bg-light mb-3">
-                <button form="awesomeForm" class="btn btn-primary btn-md" type="submit" title="Go to HPP">Open HPP</button>
-                <button form="awesomeForm" class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HPP in IFrame via GET">IFrameGET</button>
-                <button form="awesomeForm" class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HPP in IFrame via POST">IFramePOST</button>
-                <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="newOrderId(); updateHash();">New OrderID</button>
+                <button form="awesomeForm" class="btn btn-primary btn-md" type="submit" title="Go to HSP">Open HSP</button>
+                <button form="awesomeForm" class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HSP in IFrame via GET">IFrameGET</button>
+                <button form="awesomeForm" class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSP in IFrame via POST">IFramePOST</button>
+                <button form="awesomeForm" class="btn btn-secondary btn-md" type="button" onclick="newMerchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
                 <button form="awesomeForm" class="btn btn-outline-secondary btn-md" type="button" onclick="resetPage();">Reset</button>
             </div>
 
@@ -61,30 +62,23 @@
                 <div class="row g-1 justify-content-end">
                     <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
                     <div class="col-sm-7">
-                        <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
-                            <option value="https://vagrant.wntps.com/merchant/paymentpage" selected>https://vagrant.wntps.com/merchant/paymentpage</option>
-                            <option value="https://vagrant.wntps.com/merchant/preauthpage">https://vagrant.wntps.com/merchant/preauthpage</option>
-                            <option value="https://lpivotal.wntps.com/merchant/paymentpage">https://lpivotal.wntps.com/merchant/paymentpage</option>
-                            <option value="https://lnuvei.wntps.com/merchant/paymentpage">https://lnuvei.wntps.com/merchant/paymentpage</option>
-                            <option value="https://lnuvei.wntps.com/merchant/preauthpage">https://lnuvei.wntps.com/merchant/preauthpage</option>
-                            <option value="">—————————— MQA —————————————————————————</option>
-                            <option value="https://qawsironwn.worldnettps.com/merchant/paymentpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://qawsironwn.worldnettps.com/merchant/preauthpage">https://qawsironwn.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://qawslynxwn.worldnettps.com/merchant/paymentpage">https://qalynxwn.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://qawslynxwn.worldnettps.com/merchant/preauthpage">https://qalynxwn.worldnettps.com/merchant/preauthpage</option>
-                            <option value="https://qawshoundwn.worldnettps.com/merchant/paymentpage">https://qawshoundwn.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://qawshoundwn.worldnettps.com/merchant/preauthpage">https://qawshoundwn.worldnettps.com/merchant/preauthpage</option>
-                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/paymentpage">https://qawsjazzwn.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://vagrant.worldnettps.com/merchant/paymentpage">https://vagrant.worldnettps.com/merchant/paymentpage</option>
-                            <option value="">—————————— UAT —————————————————————————</option>
-                            <option value="https://testpayments.worldnettps.com/merchant/paymentpage">https://testpayments.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://payments.uat.payroc.com/merchant/paymentpage">https://payments.uat.payroc.com/merchant/paymentpage</option>
-                            <option value="https://testpayments.nuvei.com/merchant/paymentpage">https://testpayments.nuvei.com/merchant/paymentpage</option>
-                            <option value="">—————————— Prod —————————————————————————</option>
-                            <option value="https://payments.worldnettps.com/merchant/paymentpage">https://payments.worldnettps.com/merchant/paymentpage</option>
-                            <option value="https://payments.worldnettps.com/merchant/preauthpage">https://payments.worldnettps.com/merchant/preauthpage</option>
-                            <option value="https://payments.nuvei.com/merchant/paymentpage">https://payments.nuvei.com/merchant/paymentpage</option>
-                            <option value="https://payments.nuvei.com/merchant/preauthpage">https://payments.nuvei.com/merchant/preauthpage</option>
+                        <select id="newAction" class="form-select form-select-sm" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
+                            <option value="https://vagrant.wntps.com/merchant/subscriptionpage/register" selected>https://vagrant.wntps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://lpivotal.wntps.com/merchant/subscriptionpage/register">https://lpivotal.wntps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://lnuvei.wntps.com/merchant/subscriptionpage/register">https://lnuvei.wntps.com/merchant/subscriptionpage/register</option>
+                            <option value="">—————————— MQA ——————————————————————————</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/subscriptionpage/register">https://qawsironwn.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/subscriptionpage/register">https://qawslynxwn.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/subscriptionpage/register">https://qawshoundwn.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/subscriptionpage/register">https://qawsjazzwn.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/subscriptionpage/register">https://vagrant.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="">—————————— UAT ——————————————————————————</option>                                
+                            <option value="https://testpayments.worldnettps.com/merchant/subscriptionpage/register">https://testpayments.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://payments.uat.payroc.com/merchant/subscriptionpage/register">https://payments.uat.payroc.com/merchant/subscriptionpage/register</option>
+                            <option value="https://testpayments.nuvei.com/merchant/subscriptionpage/register">https://testpayments.nuvei.com/merchant/subscriptionpage/register</option>
+                            <option value="">—————————— Prod ——————————————————————————</option>
+                            <option value="https://payments.worldnettps.com/merchant/subscriptionpage/register">https://payments.worldnettps.com/merchant/subscriptionpage/register</option>
+                            <option value="https://payments.nuvei.com/merchant/subscriptionpage/register">https://payments.nuvei.com/merchant/subscriptionpage/register</option>
                         </select>
                     </div>
                     <div class="col-sm-2" title="Method (ignored for iframe)">
@@ -109,54 +103,7 @@
 
                     <div class="col-sm-3"><label for="TERMINALID" class="form-label">Terminal</label></div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();" />
-                    </div>
-                    <div class="col-sm-2 text-start" title="Multi-Currency">
-                        <input type="checkbox" class="form-check-input" id="multicurrency" onchange="updateHash();" />
-                        <label for="multicurrency" class="form-label">MC</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <select class="form-select form-select-sm" name="TERMINALTYPE" title="TERMINALTYPE">
-                            <option value="1">1 - Moto</option>
-                            <option value="2" selected>2 - Internet</option>
-                            <option value="3">3 - CHP</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <input list="txntypes" type="text" class="form-control form-control-sm" name="TRANSACTIONTYPE" title="TRANSACTIONTYPE">
-                            <datalist id="txntypes">
-                                <option value="4">Normal Mail order/Telephone Order trans</option>
-                                <option value="5">3DS fully authenticated trans</option>
-                                <option value="6">3DS attempted trans</option>
-                                <option value="7">Normal eCommerce trans</option>
-                            </datalist>
-                    </div>
-
-                    <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" onchange="updateHash();" />
-                    </div>
-                    <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
-                        <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
-                        <label for="sha512" class="form-label" style="font-size:11px;">SHA<br>512</label>
-                    </div>
-                    <div class="col-sm-5">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
-                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise"></i></span-->
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row g-1 py-2 justify-content-end">
-                    <div class="col-sm-3"><label for="ORDERID" class="form-label">Order ID</label></div>
-                    <div class="col-sm-3">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm" id="ORDERID" name="ORDERID" maxlength="20" oninput="updateHash();" />
-                            <!-- maxlength > 12 to be able to test order ids more then 12 chars in length -->
-                            <span class="input-group-text input-group-btn" onclick="newOrderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
-                        </div>
+                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();">
                     </div>
                     <div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div>
                     <div class="col-sm-5">
@@ -166,143 +113,168 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3"><label for="AMOUNT" class="form-label">Amount</label></div>
-                    <div class="col-sm-2">
-                        <select class="form-select form-select-sm" id="CURRENCY" name="CURRENCY" onchange="updateHash();">
-                            <option value="EUR">EUR</option>
-                            <option value="USD" selected>USD</option>
-                            <option value="CAD">CAD</option>
-                            <option value="GBP">GBP</option>
-                            <option value="AUD">AUD</option>
-                            <option value="JPY">JPY</option>
-                            <option value="BHD">BHD</option>
-                            <option value="KWD">KWD</option>
-                            <option value="JMD">JMD</option>
-                            <option value="VES">VES</option>
-                        </select>
+                    <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" onchange="updateHash();" />
                     </div>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control form-control-sm" id="AMOUNT" name="AMOUNT" value="10.17" onchange="updateHash();">
+                    <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
+                        <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();">
+                        <label for="sha512" class="form-label" style="font-size:11px;">SHA<br>512</label>
                     </div>
-
-                    <div class="col-sm-3"><label class="form-label">Description</label></div>
-                    <div class="col-sm-9">
-                        <textarea class="form-control form-control-sm" rows="1" name="DESCRIPTION">Order description text - The Director&#39;s Cut</textarea>
-                    </div>
-
-                    <div class="col-sm-3"><label class="form-label">Auto Ready</label></div>
-                    <div class="col-sm-2">
-                        <input list="autoready" class="form-control form-control-sm" name="AUTOREADY" value="Y">
-                        <datalist id="autoready">
-                            <option value="N" />
-                            <option value="Y" />
-                        </datalist>
-                    </div>
-                    <div class="col-sm-5"><label class="form-label float-end">Bypass Surcharge</label></div>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" name="BYPASS_SURCHARGE">
-                    </div>
-
-                    <div class="col-sm-3"><label for="RECEIPTPAGEURL" class="form-label">Receipt Page URL</label></div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-5" title="Hash">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-receipt"></i></span>
-                            <input list="receipturls" type="text" class="form-control form-control-sm" id="RECEIPTPAGEURL" name="RECEIPTPAGEURL"
-                                   value="http://simulator.wntps.com:8181/receipt" onchange="updateHash();">
-                                <datalist id="receipturls">
-                                    <option value="http://slowpoke:8181/receipt" />
-                                    <option value="http://vagrant.wntps.com/merchant/payment/defaultHppReceipt" />
-                                    <option value="http://qawslynxwn.worldnettps.com/merchant/payment/defaultHppReceipt" />
-                                </datalist>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3"><label for="VALIDATIONURL" class="form-label">Validation Page URL</label>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-journal-check"></i></span>
-                            <input list="bgvalidationurls" type="text" class="form-control form-control-sm" id="VALIDATIONURL" name="VALIDATIONURL" onchange="updateHash();">
-                                <datalist id="bgvalidationurls">
-                                    <option value="http://http-dumper.wntps.com/notifications/success.py" />
-                                    <option value="https://vvd.pythonanywhere.com/validate" />
-                                </datalist>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3"><label class="form-label">Secure Card</label></div>
-                    <div class="col-sm-5" title="MERCHANTREF">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="text" class="form-control form-control-sm" name="SECURECARDMERCHANTREF">
-                        </div>    
-                    </div>
-                    <div class="col-sm-4" title="CARDREFERENCE">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-unlock"></i></span>
-                            <input type="text" class="form-control form-control-sm" name="CARDREFERENCE">
-                        </div>    
-                    </div>
-
-                    <div class="col-sm-3"><label for="EMAIL" class="form-label">Email/Phone</label></div>
-                    <div class="col-sm-5">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input type="text" class="form-control form-control-sm" id="EMAIL" name="EMAIL" value="vvd@worldnettps.it">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                            <input type="text" class="form-control" id="PHONE" name="PHONE" value="800 0005555">
+                            <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
+                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise"></i></span-->
                         </div>
                     </div>
                 </div>
 
-                <div id="avs" class="row g-1 pt-0 pb-1 justify-content-end">
-                    <div class="col-sm-3"><label class="form-label">AVS</label><input type="checkbox" class="form-check-input float-end" id="enableAvs"></div>
+                <div class="row g-1 py-2 justify-content-end">
+                    <div class="col-sm-3"><label for="MERCHANTREF" class="form-label">Merchant Ref</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" id="MERCHANTREF" name="MERCHANTREF" oninput="updateHash();" />
+                            <span class="input-group-text input-group-btn" onclick="newMerchantRef(); updateHash();" title="New Merchant Ref"><i class="bi bi-arrow-clockwise"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label class="form-label">Secure Card</label></div>
+                    <div class="col-sm-4" title="Merchant Ref">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="text" class="form-control form-control-sm" id="SECURECARDMERCHANTREF" name="SECURECARDMERCHANTREF" value="vvdscref1" onchange="updateHash();" />
+                        </div>
+                    </div>
+                    <div class="col-sm-1" title="Use Token's Merchant or Card Ref">
+                        <input type="checkbox" class="btn-check" id="cardref" onchange="document.getElementById('CARDREFERENCE').disabled = !this.checked; document.getElementById('SECURECARDMERCHANTREF').disabled = this.checked; updateHash();">
+                        <label for="cardref" class="form-control form-control-sm text-center input-group-btn"><i class="bi bi-arrow-repeat "></i></label>
+                    </div>
+                    <div class="col-sm-4" title="Card Reference">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" id="CARDREFERENCE" name="CARDREFERENCE" value="2967532633123095" oninput="updateHash();" disabled />
+                            <span class="input-group-text"><i class="bi bi-unlock"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="STOREDSUBSCRIPTIONREF" class="form-label">Payment Plan Ref</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm" id="STOREDSUBSCRIPTIONREF" name="STOREDSUBSCRIPTIONREF" value="ssref1" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label class="form-label">Initial/Recurring Amount</label></div>
                     <div class="col-sm-4">
-                        <div class="input-group input-group-sm" title="Street">
-                            <span class="input-group-text">Address1</span>
-                            <input type="text" class="form-control form-control-sm" name="ADDRESS1" value="156 Main str.">
-                        </div>
+                        <input type="text" class="form-control form-control-sm" id="SUBSCRIPTIONINITIALAMOUNT" name="SUBSCRIPTIONINITIALAMOUNT" value="1.10" title="Subscription Initial Amount" />
                     </div>
-                    <div class="col-sm-3">
-                        <div class="input-group input-group-sm" title="City (?)">
-                            <span class="input-group-text">Address2</span>
-                            <input type="text" class="form-control form-control-sm" name="ADDRESS2" value="Dublin">
-                        </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control form-control-sm" id="SUBSCRIPTIONRECURRINGAMOUNT" name="SUBSCRIPTIONRECURRINGAMOUNT" value="10.10" title="Subscription Recurring Amount" />
                     </div>
-                    <div class="col-sm-2">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">Zip</span>
-                            <input type="text" class="form-control form-control-sm" name="POSTCODE" value="12345">
-                        </div>
-                    </div>
-                    <div class="col-sm-3"></div>
+                    
+                    <div class="col-sm-3"><label class="form-label">Start/End Date</label></div>
                     <div class="col-sm-4">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">City</span>
-                            <input type="text" class="form-control form-control-sm" id="city" name="CITY" value="Dublin">
-                        </div>
+                        <input type="text" class="form-control form-control-sm" id="STARTDATE" name="STARTDATE" value="01-10-2024" title="Start Date" />
                     </div>
-                    <div class="col-sm-3">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">Region</span>
-                            <input type="text" class="form-control form-control-sm" name="REGION" value="Dun Laoghaire">
-                        </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control form-control-sm" id="ENDDATE" name="ENDDATE" value="31-12-2024" title="End Date" />
                     </div>
-                    <div class="col-sm-2">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">Country</span>
-                            <input type="text" class="form-control form-control-sm" name="COUNTRY" value="IE">
+                </div>
+
+            <!-- New Payment Plan -->
+                <div class="row g-1 py-1 justify-content-end border">
+                    <div class="col-sm-3"><label class="form-label">Create Payment Plan &nbsp;</label>
+                        <input type="checkbox" class="form-check-input float-end" id="newPlan" data-bs-toggle="" data-bs-target="#newPlanFields" />
+                    </div>
+                    <div class="col-sm-9"></div>
+
+                    <div id="newPlanFields" class="row g-1 px-1">
+                        <div class="col-sm-3"><label for="NEWSTOREDSUBSCRIPTIONREF" class="form-label">Payment Plan Ref</label></div>
+                        <div class="col-sm-9">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0" onchange="document.getElementById('NEWSTOREDSUBSCRIPTIONREF').disabled = !this.checked;" /></span>
+                                <input type="text" class="form-control form-control-sm" id="NEWSTOREDSUBSCRIPTIONREF" name="NEWSTOREDSUBSCRIPTIONREF" value="HPLANREF1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3"><label for="NAME" class="form-label">Plan Name</label></div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-sm" id="NAME" name="NAME" value="HPLANREF1 Name" />
+                        </div>
+                        <div class="col-sm-3"><label for="DESCRIPTION" class="form-label">Plan Description</label></div>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-sm" id="DESCRIPTION" name="DESCRIPTION" value="HPLANREF1 Description" />
+                        </div>
+
+                        <div class="col-sm-3"><label class="form-label">Initial/Recurring Amount</label></div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm" id="INITIALAMOUNT" name="INITIALAMOUNT" value="1.10" title="Initial Amount" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" id="RECURRINGAMOUNT" name="RECURRINGAMOUNT" value="10.10" title="Recurring Amount" />
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0" id="curr" onchange="document.getElementById('CURRENCY').disabled = !this.checked;"></span>
+                            <select class="form-select form-select-sm" id="CURRENCY" name="CURRENCY">
+                                <option value="EUR">EUR</option>
+                                <option value="USD" selected>USD</option>
+                                <option value="CAD">CAD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="AUD">AUD</option>
+                                <option value="JPY">JPY</option>
+                                <option value="BHD">BHD</option>
+                                <option value="KWD">KWD</option>
+                                <option value="JMD">JMD</option>
+                                <option value="VES">VES</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3"><label for="PERIODTYPE" class="form-label">Period/Length/Type</label></div>
+                        <div class="col-sm-3">
+                            <div class="input-group input-group-sm">
+                                <select class="form-select form-select-sm" id="PERIODTYPE" name="PERIODTYPE" title="PERIODTYPE">
+                                    <option value="2">2 - Weekly</option>
+                                    <option value="3">3 - Forthightly</option>
+                                    <option value="4" selected>4 - Monthly</option>
+                                    <option value="5">5 - Quarterly</option>
+                                    <option value="6">6 - Yearly</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control form-control-sm" id="LENGTH" name="LENGTH" value="1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm">
+                                <select class="form-select form-select-sm" id="TYPE" name="TYPE" title="TYPE">
+                                    <option value="1" selected>1 - Automatic</option>
+                                    <option value="2">2 - Manual</option>
+                                    <option value="3">3 - Automatic (without amounts)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3"><label for="ONUPDATE" class="form-label">On Update/Delete</label></div>
+                        <div class="col-sm-4">
+                            <select class="form-select form-select-sm" id="ONUPDATE" name="ONUPDATE" title="ONUPDATE">
+                                <option value="1">1 - Continue</option>
+                                <option value="2" selected>2 - Update</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <select class="form-select form-select-sm" id="ONDELETE" name="ONDELETE" title="ONDELETE">
+                                <option value="1">1 - Continue</option>
+                                <option value="2" selected>2 - Cancel</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
             <!-- Level II data -->
-                <div id="level2Data" class="row g-1 py-1 justify-content-end">
-                    <div class="col-sm-3"><label class="form-label">Level II</label><input type="checkbox" class="form-check-input float-end" id="enableLevel2"></div>
+                <div id="level2Data" class="row g-1 py-2 justify-content-end">
+                    <div class="col-sm-3"><label class="form-label">Level II</label><input type="checkbox" class="form-check-input float-end" id="enableLevel2" /></div>
                     <div class="col-sm-6">
                         <div class="input-group input-group-sm" title="CUSTOMER_REF_NUMBER">
                             <span class="input-group-text">Customer Ref Number</span>
@@ -342,6 +314,7 @@
                             <input type="text" class="form-control form-control-sm" name="SHIPPING_POSTCODE" value="09876">
                         </div>
                     </div>
+
                     <div class="col-sm-3"></div>
                     <div class="col-sm-4">
                         <div class="input-group input-group-sm" title="SHIPPING_CITY">
@@ -365,9 +338,9 @@
 
             <!-- Level III data -->
                 <div class="row g-1 py-1">
-                    <div class="col-sm-3"><label class="form-label">Level III/Conv Fee</label></div>
+                    <div class="col-sm-3"><label class="form-label">Level III</label></div>
                     <div class="col-sm-9 d-grid">
-                        <button id="addLineItem" class="btn btn-sm btn-outline-success" type="button"> + </button>
+                        <button id="addLineItem" class="btn btn-outline-success btn-sm" type="button"> + </button>
                     </div>
                 </div>
 
@@ -456,19 +429,24 @@
         </ul>
     </div>
 </footer>
-
+    
 <script>
     $(document).ready(function(){
-        $('#avs input[type=text]').each(function() {  $(this).prop("disabled", true);  });
+        $('#newPlanFields *').each(function() {  $(this).prop("disabled", true);  });
         $('#level2Data input[type=text]').each(function() {  $(this).prop("disabled", true);  });
         $('#level3Data input[type=text]').each(function() {  $(this).prop("disabled", true);  });
         //$('#addLineItem').prop("disabled", true);
     });
 
-    $enableAvsElem = $('#enableAvs');
-    $enableAvsElem.change(function(){
-        $('#avs input[type=text]').each(function() {
-            $(this).prop("disabled", !$enableAvsElem.is(":checked"));
+    $newPlanElem = $('#newPlan');
+    $newPlanElem.change(function(){
+        $('#STOREDSUBSCRIPTIONREF').prop("disabled", $newPlanElem.is(":checked"));
+        $('#SUBSCRIPTIONINITIALAMOUNT').prop("disabled", $newPlanElem.is(":checked"));
+        $('#SUBSCRIPTIONRECURRINGAMOUNT').prop("disabled", $newPlanElem.is(":checked"));
+
+        $('#newPlanFields *').each(function() {
+            $(this).prop("disabled", !$newPlanElem.is(":checked"));
+            $(this).prop("checked", $newPlanElem.is(":checked"));
         });
     });
 
@@ -507,33 +485,25 @@
 </script>
 
 <script>
-    function newOrderId() {
-        document.getElementById("ORDERID").value = "HPP" + Math.floor(100000000 + Math.random() * 900000000);
-        //alert(Math.random().toString(36).toUpperCase().substring(2, 30));
+    function newMerchantRef() {
+        document.getElementById("MERCHANTREF").value = 'HSUB' + Math.floor(100000000 + Math.random() * 900000000);
     }
 
     function updateHash() {
-        //newOrderId();
+        //newMerchantRef();
         const hashFields = [];
 
         hashFields.push(document.getElementById("TERMINALID").value,
-                        document.getElementById("ORDERID").value
+                        document.getElementById("MERCHANTREF").value
                         );
-        if (document.getElementById("multicurrency").checked) 
-            hashFields.push(document.getElementById("CURRENCY").value);
-        
-        hashFields.push(document.getElementById("AMOUNT").value,
-                        document.getElementById("DATETIME").value,
+        if (document.getElementById("cardref").checked) {
+            hashFields.push(document.getElementById("CARDREFERENCE").value);
+        } else 
+            hashFields.push(document.getElementById("SECURECARDMERCHANTREF").value);
+        hashFields.push(document.getElementById("DATETIME").value,
+                        document.getElementById("STARTDATE").value,
+                        document.getElementById("TERMINALSECRET").value
                         );
-        var receiptPageUrl = document.getElementById("RECEIPTPAGEURL").value;
-        if (receiptPageUrl.trim().length != 0) {
-            hashFields.push(receiptPageUrl);
-        }
-        var validationPageUrl = document.getElementById("VALIDATIONURL").value;
-        if (validationPageUrl.trim().length != 0) {
-            hashFields.push(validationPageUrl);
-        }
-        hashFields.push(document.getElementById("TERMINALSECRET").value);
 
         if (document.getElementById("sha512").checked) {
             hashString = hashFields.join(":");
@@ -544,13 +514,21 @@
         }
 
         document.getElementById("awesomeForm").action = document.getElementById("newAction").value;
-        //document.getElementById("purchase").value = getObjectById("AMOUNT").value + " " + getObjectById("CURRENCY").value;
     }
 
     document.getElementById("awesomeForm")?.addEventListener("submit", function(event) {
         //setDateTime();
         updateHash();
     });
+
+    /*function enableNewPlan() {
+        document.getElementById("STOREDSUBSCRIPTIONREF").disabled = 
+        document.getElementById("SUBSCRIPTIONINITIALAMOUNT").disabled = 
+        document.getElementById("SUBSCRIPTIONRECURRINGAMOUNT").disabled = 
+        document.getElementById("newPlan").checked;
+
+        document.getElementById("newPlanFields").querySelectorAll("input, select").forEach((item) => { item.disabled = !document.getElementById("newPlan").checked; });
+    }*/
 
     function createIframe() {
         const iframeContainer = document.getElementById('iframeContainer');
@@ -656,6 +634,22 @@
     function setDateTime() {
         const formattedDateTime = getDateTimeFormatted();
         document.getElementById("DATETIME").value = formattedDateTime;
+    }
+
+    function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    }
+
+    function setSubscriptionStartEndDates() {
+        const now = new Date();
+        const startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+        document.getElementById("STARTDATE").value = formatDate(startDate);
+        document.getElementById("ENDDATE").value = formatDate(endDate);
     }
 </script>
 

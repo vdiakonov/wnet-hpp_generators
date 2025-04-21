@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bulk Payments Submit Generator</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        html { overflow-y: scroll; }
+        .form-control-readonly { background-color: #e9ecef; pointer-events: none; }
+        .input-group-btn { cursor: pointer; background-color: #f8f9fa; }
+        :focus { box-shadow: 0 0 8px 0 rgba(13,110,253,.25) !important; }
+        .bi-size-48 { font-size: 48px; }
+        .bi-size-24 { font-size: 24px; }
+    </style>
+
+    <script src="js/common.js"></script>
+    <script src="js/crypto.js"></script>
+</head>
+<body class="d-flex flex-column h-100 bg-light" onload="setDateTime(); updateHash();">
+<header class="bg-dark bg-gradient">
+    <div class="container">
+        <div class="row py-2 text-center">
+            <div class="col-1 text-start"><a class="link-secondary pe-2" href="index.html"><i class="bi bi-house-door-fill bi-size-24"></i></a></div>
+            <h4 class="col-6 my-1 text-light">Bulk Payments Submit Generator</h4>
+            <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
+                <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
+                <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
+                <a class="me-3 py-2 link-secondary text-decoration-none" href="subscriptionpage.html">Subscriptions</a>
+                <a class="me-3 py-2 link-secondary text-decoration-none" href="bulkpayments.html">Bulk</a>
+                <a class="me-3 py-2 link-secondary text-decoration-none" href="mpi.html">MPI</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main class="flex-shrink-0 pt-3">
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 order-md-last">
+            <div class="sticky-top bg-light mb-3">
+                <button class="btn btn-primary btn-md" type="submit" form="awesomeForm" title="Upload Bulk file">Submit</button>
+                <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Upload Bulk file in IFrame via POST">IFramePOST</button>
+                <button class="btn btn-outline-secondary btn-md" type="reset" onclick="resetPage();">Reset</button>
+            </div>
+
+            <div id="iframeContainer" class="input-group input-group-sm visually-hidden" style="width:527px; !important;">
+                <span class="input-group-text input-group-btn" onclick="copyUrlToClipboard();" title="Copy URL to Clipboard"><i class="bi bi-copy"></i></span>
+                <input type="text" class="form-control form-control-sm" id="hppURLForSharing" tabindex="-1" readonly />
+            </div>
+        </div>
+
+        <div class="col-md-7" style="height: 400px;">
+            <form method="POST" id="awesomeForm" name="awesomeForm" target="_blank" action="" enctype="multipart/form-data">
+                <div class="row g-1 justify-content-end">
+                    <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
+                    <div class="col-sm-9">
+                        <select class="form-select form-select-sm" id="newAction" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
+                            <option value="https://vagrant.wntps.com/merchant/bulkpayments/submit" selected>https://vagrant.wntps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://lpivotal.wntps.com/merchant/bulkpayments/submit">https://lpivotal.wntps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://lnuvei.wntps.com/merchant/bulkpayments/submit">https://lnuvei.wntps.com/merchant/bulkpayments/submit</option>
+                            <option value="">—————————— MQA ————————————————————</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/bulkpayments/submit">https://qawsironwn.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/bulkpayments/submit">https://qawslynxwn.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/bulkpayments/submit">https://qawshoundwn.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/bulkpayments/submit">https://qawsjazzwn.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/bulkpayments/submit">https://vagrant.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="">—————————— UAT —————————————————————</option>
+                            <option value="https://testpayments.worldnettps.com/merchant/bulkpayments/submit">https://testpayments.worldnettps.com/merchant/bulkpayments/submit</option>
+                            <option value="https://payments.uat.payroc.com/merchant/bulkpayments/submit">https://payments.uat.payroc.com/merchant/bulkpayments/submit</option>
+                            <option value="https://testpayments.nuvei.com/merchant/bulkpayments/submit">https://testpayments.nuvei.com/merchant/bulkpayments/submit</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3"><label for="otherfield_sandbox" class="form-label">iSandbox tokens</label></div>
+                    <div class="col-sm-9">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" id="enableSandbox" onchange="document.getElementById('otherfield_sandbox').disabled = !this.checked;" /></span>
+                            <input list="sandboxrestrictions" type="text" class="form-control form-control-sm" id="otherfield_sandbox" title="Blank value will apply all restrictions on embedded content" 
+                                   value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" disabled />
+                                <datalist id="sandboxrestrictions">
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts" />
+                                    <option value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
+                                </datalist>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="terminalid" class="form-label">Terminal</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="terminalid" name="terminalid" value="1005" maxlength="8" onchange="updateHash();" />
+                    </div>
+                    <div class="col-sm-1 text-end"><label for="datetime" class="form-label"></label></div>
+                    <div class="col-sm-5">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                            <input type="text" class="form-control form-control-sm" id="datetime" name="datetime" placeholder="DD-MM-YYYY:HH:MM:SS:SSS" value="01-01-2024:00:00:00:000" onchange="updateHash();">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="terminalsecret" class="form-label">Terminal Secret</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="terminalsecret" maxlength="48" value="someSecretPhrase" oninput="updateHash()" />
+                    </div>
+                    <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
+                        <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
+                        <label for="sha512" class="form-label" style="font-size:11px;">SHA<br>512</label>
+                    </div>
+                    <div class="col-sm-5" title="Hash">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="hash" name="hash" readonly tabindex="-1" />
+                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise" title="Update Hash"></i></span-->
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3"><label for="transactioncount" class="form-label">Transaction Count</label></div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="transactioncount" name="transactioncount" value="3" onchange="updateHash();" />
+                    </div>
+
+                    <div class="col-sm-3"><label for="batchtotal" class="form-label">Batch Total</label></div>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="batchtotal" name="batchtotal" value="30.00" onchange="updateHash();" />
+                    </div>
+
+                    <div class="col-sm-3"><label for="isbulkach" class="form-label">Transaction Type</label></div>
+                    <div class="col-sm-2">
+                        <input type="radio" class="form-check-input" id="sale" name="isbulkach" value="N" checked /> Sale
+                    </div>
+                    <div class="col-sm-7">
+                        <input type="radio" class="form-check-input" id="ach" name="isbulkach" value="Y" /> Ach JH
+                    </div>
+
+                    <div class="col-sm-3"><label for="file" class="form-label">Bulk File</label></div>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control form-control-sm" id="file" name="file" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <hr class="mt-0">
+            <h5 class="pb-2">Bulk Payments Processing Result (WIP)</h5>
+            <form method="GET" id="bulkResultForm" name="bulkResultForm" target="_blank" action="https://vagrant.wntps.com/merchant/bulkpayments/result">
+                <div class="row g-1 justify-content-end">
+                    <div class="col-sm-3"><label for="bulkid" class="form-label">Bulk ID</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm" id="bulkid" name="bulkid" value="DUHDZJHGYY" 
+                               oninput="document.getElementById('bulkHash').value = md5(document.getElementById('terminalid').value + this.value + document.getElementById('terminalsecret').value)" />
+                    </div>
+                    <div class="col-sm-5" title="Hash">
+                        <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="bulkHash" name="hash" readonly tabindex="-1" />
+                    </div>
+                    <div class="col-sm-1">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="getBulkResult();" title="Check Bulk Payments Processing Result">Check</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-7 mt-3">
+            <div class="row g-1 justify-content-end">
+                <div class="col-sm-3"><label for="bulkResult" class="form-label"></label></div>
+                <div class="col-sm-9">
+                    <iframe id="bulkResultFrame" name="bulkResultFrame"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+<footer class="mt-auto pb-3">
+    <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a href="paymentpage.html" class="nav-link px-2 link-secondary">Payments</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="securecardpage.html" class="nav-link px-2 link-secondary">Secure Tokens</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="subscriptionpage.html" class="nav-link px-2 link-secondary">Subscriptions</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="bulkpayments.html" class="nav-link px-2 link-secondary">Bulk Payments</a></li>
+            <label class="nav-link px-2 link-secondary">|</label>
+            <li class="nav-item"><a href="mpi.html" class="nav-link px-2 link-secondary">MPI</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    function updateHash() {
+        const hashFields = [];
+        
+        hashFields.push(document.getElementById("terminalid").value,
+                        document.getElementById("transactioncount").value,
+                        document.getElementById("batchtotal").value,
+                        document.getElementById("datetime").value,
+                        document.getElementById("terminalsecret").value
+                        );
+
+        if (document.getElementById("sha512").checked) {
+            hashString = hashFields.join(":");
+            sha512(hashString).then((digestHex) => { document.getElementById("hash").value = digestHex; });
+        } else {
+            hashString = hashFields.join("");
+            document.getElementById("hash").value = md5(hashString);
+        }
+
+        document.getElementById("awesomeForm").action = document.getElementById("newAction").value;
+    }
+
+    document.getElementById("awesomeForm")?.addEventListener("submit", function(event) {
+        //setDateTime();
+        updateHash();
+    });
+
+    function createIframe() {
+        const iframeContainer = document.getElementById('iframeContainer');
+        iframeContainer.classList.remove("visually-hidden");
+        //iframeContainer.style.display = "block";
+
+        // Remove any existing iframes within the iframeContainer
+        Array.from(iframeContainer.children).forEach((child) => {
+            if (child.tagName === 'IFRAME') {
+                iframeContainer.removeChild(child);
+            }
+        });
+
+        // Create an iframe element
+        const iframe = document.createElement('iframe');
+        iframe.name = 'worldnet-payment';
+        iframe.allow = 'payment';
+        iframe.style = 'width:100%; height:250px; margin:0; border:1px solid #ccc; border-top:none;';
+        iframe.src = awesomeForm.action;
+        const sandboxRestrictions = document.getElementById('otherfield_sandbox');
+        if (!sandboxRestrictions.disabled) {
+            iframe.sandbox = sandboxRestrictions.value;
+        } else {
+            iframe.removeAttribute('sandbox');
+        }
+        iframeContainer.appendChild(iframe);
+
+        return iframe;
+    }
+
+    function loadIframePost() {
+        // Get the form data
+        const awesomeForm = document.getElementById('awesomeForm');
+
+        // Create an iframe element
+        const iframe = createIframe();
+        //iframe.src = awesomeForm.action;
+        document.getElementById("hppURLForSharing").value = awesomeForm.action;
+        
+        // Create a form inside the iframe document to submit the payment request
+        const iframeForm = document.createElement('form');
+        iframeForm.method = 'POST';
+        iframeForm.enctype = 'multipart/form-data';
+        iframeForm.action = awesomeForm.action;
+        iframeForm.target = iframe.name;
+
+        // Append the form data as hidden inputs inside the iframe form
+        const formData = new FormData(awesomeForm);
+        //formData.append("iniframe", "Y");
+        formData.forEach(function(value, key) {
+            if (value instanceof File) {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.name = key;
+                const originalFileInput = awesomeForm.querySelector(`input[name="${key}"]`);
+                fileInput.files = originalFileInput.files;
+                iframeForm.appendChild(fileInput);
+            } else {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value;
+                iframeForm.appendChild(input);
+            }
+        });
+
+        // Append the iframe form to the iframe body and submit it
+        iframe.contentWindow.document.body.appendChild(iframeForm);
+        iframeForm.submit();
+    }
+
+    function resetPage() {
+        //document.getElementById("iframeContainer").style.display = "none";
+        //document.getElementById("iframeContainer").classList.add("visually-hidden");
+        //document.getElementById("hppURLForSharing").value = "";
+        //document.getElementById("iframe").src = "about:blank";
+
+        location.reload();
+    }
+
+    function copyUrlToClipboard() {
+        const url = document.getElementById("hppURLForSharing");
+        navigator.clipboard.writeText(url.value);
+    }
+
+    function getDateTimeFormatted() {
+        const now = new Date();
+
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const year = now.getFullYear();
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+        return `${day}-${month}-${year}:${hours}:${minutes}:${seconds}:${milliseconds}`;
+    }
+
+    function setDateTime() {
+        const formattedDateTime = getDateTimeFormatted();
+        document.getElementById("datetime").value = formattedDateTime;
+    }
+</script>
+
+<script>
+    function getBulkResult(){
+        document.getElementById('bulkHash').value = md5(document.getElementById('terminalid').value + document.getElementById('bulkid').value + document.getElementById('terminalsecret').value);
+
+        const bulkResultForm = document.getElementById("bulkResultForm");
+        const searchParams = new URLSearchParams(new FormData(bulkResultForm));
+        const queryString = "terminalid=" + document.getElementById('terminalid').value + "&" + searchParams.toString();
+        const url = bulkResultForm.action + "?" + queryString;
+
+        /*fetch(url)
+            .then(response => response.json())
+            .then(data => document.getElementById('result').value = data.value)
+            .catch(err => console.log('Error:', err));*/
+
+        document.getElementById('bulkResultFrame').src = url;
+    }
+</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Hosted Token Page Generator</title>
+    <title>MPI Request Generator</title>
     <link rel="shortcut icon" href="images/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -12,7 +12,7 @@
         html { overflow-y: scroll; }
         .form-control-readonly { background-color: #e9ecef; pointer-events: none; }
         .input-group-btn { cursor: pointer; background-color: #f8f9fa; }
-        :focus { box-shadow: 0 0 8px 0 rgba(13,110,253,.25) !important; }
+        :focus {box-shadow: 0 0 8px 0 rgba(13,110,253,.25) !important;}
         .bi-size-48 { font-size: 48px; }
         .bi-size-24 { font-size: 24px; }
     </style>
@@ -20,12 +20,12 @@
     <script src="js/common.js"></script>
     <script src="js/crypto.js"></script>
 </head>
-<body class="d-flex flex-column h-100 bg-light" onload="newMerchantRef(); setDateTime(); updateHash();">
+<body class="d-flex flex-column h-100 bg-light" onload="newOrderId(); setDateTime(); updateHash();">
 <header class="bg-dark bg-gradient">
     <div class="container">
         <div class="row py-2 text-center">
             <div class="col-1 text-start"><a class="link-secondary pe-2" href="index.html"><i class="bi bi-house-door-fill bi-size-24"></i></a></div>
-            <h4 class="col-6 my-1 text-light">Hosted Token Page Generator</h4>
+            <h4 class="col-6 my-1 text-light">MPI Request Generator</h4>
             <nav class="col d-inline-flex mt-2 mt-md-0 ms-md-auto justify-content-end">
                 <a class="me-3 py-2 link-secondary text-decoration-none" href="paymentpage.html">Payments</a>
                 <a class="me-3 py-2 link-secondary text-decoration-none" href="securecardpage.html">Secure Tokens</a>
@@ -42,10 +42,10 @@
     <div class="row">
         <div class="col-md-5 order-md-last">
             <div class="sticky-top bg-light mb-3">
-                <button class="btn btn-primary btn-md" type="submit" form="awesomeForm" title="Go to HSTP">Open HSTP</button>
-                <button class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Load HSTP in IFrame via GET">IFrameGET</button>
-                <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Load HSTP in IFrame via POST">IFramePOST</button>
-                <button class="btn btn-secondary btn-md" type="button" onclick="newMerchantRef(); updateHash();" title="New Merchant Ref">New MRef</button>
+                <button class="btn btn-primary btn-md" type="submit" form="awesomeForm" title="Send MPI Request">Submit</button>
+                <button class="btn btn-success btn-md" type="button" onclick="loadIframeGet();" title="Submit MPI Request in IFrame via GET">IFrameGET</button>
+                <button class="btn btn-warning btn-md" type="button" onclick="loadIframePost();" title="Submit MPI Request in IFrame via POST">IFramePOST</button>
+                <button class="btn btn-secondary btn-md" type="button" onclick="newOrderId(); updateHash();">New OrderID</button>
                 <button class="btn btn-outline-secondary btn-md" type="reset" onclick="resetPage();">Reset</button>
             </div>
 
@@ -61,22 +61,23 @@
                     <div class="col-sm-3"><label for="newAction" class="form-label">App URL</label></div>
                     <div class="col-sm-7">
                         <select id="newAction" class="form-select form-select-sm" onchange="javaScript: document.getElementById('awesomeForm').action = this.value;">
-                            <option value="https://vagrant.wntps.com/merchant/securecardpage" selected>https://vagrant.wntps.com/merchant/securecardpage</option>
-                            <option value="https://lpivotal.wntps.com/merchant/securecardpage">https://lpivotal.wntps.com/merchant/securecardpage</option>
-                            <option value="https://lnuvei.wntps.com/merchant/securecardpage">https://lnuvei.wntps.com/merchant/securecardpage</option>
-                            <option value="">—————————— MQA ——————————————————————————</option>
-                            <option value="https://qawsironwn.worldnettps.com/merchant/securecardpage">https://qawsironwn.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://qawslynxwn.worldnettps.com/merchant/securecardpage">https://qawslynxwn.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://qawshoundwn.worldnettps.com/merchant/securecardpage">https://qawshoundwn.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/securecardpage">https://qawsjazzwn.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://vagrant.worldnettps.com/merchant/securecardpage">https://vagrant.worldnettps.com/merchant/securecardpage</option>
-                            <option value="">—————————— UAT ——————————————————————————</option>
-                            <option value="https://testpayments.worldnettps.com/merchant/securecardpage">https://testpayments.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://payments.uat.payroc.com/merchant/securecardpage">https://payments.uat.payroc.com/merchant/securecardpage</option>
-                            <option value="https://testpayments.nuvei.com/merchant/securecardpage">https://testpayments.nuvei.com/merchant/securecardpage</option>
-                            <option value="">—————————— Prod ——————————————————————————</option>
-                            <option value="https://payments.worldnettps.com/merchant/securecardpage">https://payments.worldnettps.com/merchant/securecardpage</option>
-                            <option value="https://payments.nuvei.com/merchant/securecardpage">https://payments.nuvei.com/merchant/securecardpage</option>
+                            <option value="https://vagrant.wntps.com/merchant/mpi" selected>https://vagrant.wntps.com/merchant/mpi</option>
+                            <option value="https://lpivotal.wntps.com/merchant/mpi">https://lpivotal.wntps.com/merchant/mpi</option>
+                            <option value="https://lnuvei.wntps.com/merchant/mpi">https://lnuvei.wntps.com/merchant/mpi</option>
+                            <option value="">—————————— MQA —————————————————</option>
+                            <option value="https://qawsironwn.worldnettps.com/merchant/mpi">https://qawsironwn.worldnettps.com/merchant/mpi</option>
+                            <option value="https://qawslynxwn.worldnettps.com/merchant/mpi">https://qawslynxwn.worldnettps.com/merchant/mpi</option>
+                            <option value="https://qawshoundwn.worldnettps.com/merchant/mpi">https://qawshoundwn.worldnettps.com/merchant/mpi</option>
+                            <option value="https://gcpsdxownetjbs1wn.worldnettps.com/merchant/mpi">https://qawsjazzwn.worldnettps.com/merchant/mpi</option>
+                            <option value="https://vagrant.worldnettps.com/merchant/mpi">https://vagrant.worldnettps.com/merchant/mpi</option>
+                            <option value="">—————————— UAT —————————————————</option>
+                            <option value="https://testpayments.worldnettps.com/merchant/mpi">https://testpayments.worldnettps.com/merchant/mpi</option>
+                            <option value="https://payments.uat.payroc.com/merchant/mpi">https://payments.uat.payroc.com/merchant/mpi</option>
+                            <option value="https://testpayments.nuvei.com/merchant/mpi">https://testpayments.nuvei.com/merchant/mpi</option>
+                            <option value="">—————————— Prod —————————————————</option>
+                            <option value="https://payments.worldnettps.com/merchant/mpi">https://payments.worldnettps.com/merchant/mpi</option>
+                            <option value="https://payments.payroc.com/merchant/mpi">https://payments.payroc.com/merchant/mpi</option>
+                            <option value="https://payments.nuvei.com/merchant/mpi">https://payments.nuvei.com/merchant/mpi</option>
                         </select>
                     </div>
                     <div class="col-sm-2" title="Method (ignored for iframe)">
@@ -91,7 +92,7 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" id="enableSandbox" onchange="document.getElementById('OTHERFIELD_SANDBOX').disabled = !this.checked;" /></span>
                             <input list="sandboxrestrictions" type="text" class="form-control form-control-sm" id="OTHERFIELD_SANDBOX" title="Blank value will apply all restrictions on embedded content" 
-                                   value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" disabled>
+                                   value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" disabled />
                                 <datalist id="sandboxrestrictions">
                                     <option value="allow-modals allow-forms allow-popups allow-scripts" />
                                     <option value="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" />
@@ -101,9 +102,13 @@
 
                     <div class="col-sm-3"><label for="TERMINALID" class="form-label">Terminal</label></div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1017" maxlength="10" onchange="updateHash();" />
+                        <input type="text" class="form-control form-control-sm" id="TERMINALID" name="TERMINALID" value="1010" maxlength="10" onchange="updateHash();" />
                     </div>
-                    <div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div>
+                    <div class="col-sm-1 text-start" title="Multi-Currency">
+                        <input type="checkbox" class="form-check-input" id="multicurrency" onchange="updateHash();" />
+                        <label for="multicurrency" class="form-label">MC</label>
+                    </div>
+                    <!--div class="col-sm-1 text-end"><label for="DATETIME" class="form-label"></label></div-->
                     <div class="col-sm-5">
                         <div class="input-group input-group-sm" title="DATETIME">
                             <span class="input-group-text"><i class="bi bi-clock"></i></span>
@@ -113,68 +118,79 @@
 
                     <div class="col-sm-3"><label for="TERMINALSECRET" class="form-label">Terminal Secret</label></div>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" oninput="updateHash()" />
+                        <input type="text" class="form-control form-control-sm" id="TERMINALSECRET" maxlength="48" value="someSecretPhrase" onchange="updateHash();" />
                     </div>
                     <div class="col-sm-1 text-end" title="Use SHA-512 algorithm">
                         <input type="checkbox" class="form-check-input" id="sha512" onchange="updateHash();" />
                         <label for="sha512" class="form-label" style="font-size:11px;">SHA<br>512</label>
                     </div>
-                    <div class="col-sm-5" title="Hash">
+                    <div class="col-sm-5">
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control form-control-sm form-control-readonly text-truncate" id="HASH" name="HASH" readonly tabindex="-1" />
-                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise" title="Update Hash"></i></span-->
+                            <!--span class="input-group-text input-group-btn" onclick="updateHash();"><i class="bi bi-arrow-clockwise"></i></span-->
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-3"><label for="MERCHANTREF" class="form-label">Merchant Ref</label></div>
+                <div class="row g-1 py-2 justify-content-end">
+                    <div class="col-sm-3"><label for="ORDERID" class="form-label">Order ID</label></div>
                     <div class="col-sm-9">
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm" id="MERCHANTREF" name="MERCHANTREF" oninput="updateHash();" />
-                            <span class="input-group-text input-group-btn" onclick="newMerchantRef(); updateHash();"  title="New Merchant Ref"><i class="bi bi-arrow-clockwise"></i></span>
+                            <input type="text" class="form-control form-control-sm" id="ORDERID" name="ORDERID" maxlength="20" oninput="updateHash();" />
+                            <!-- maxlength > 12 to be able to test order ids more then 12 chars in length -->
+                            <span class="input-group-text input-group-btn" onclick="newOrderId(); updateHash();" title="New Order ID"><i class="bi bi-arrow-clockwise"></i></span>
                         </div>
                     </div>
 
-                    <div class="col-sm-3"><label for="ACTION" class="form-label">Token Action</label></div>
-                    <div class="col-sm-9">
-                        <select class="form-select form-select-sm" id="ACTION" name="ACTION" title="ACTION" onchange="updateHash();">
-                            <option value="register" selected>register</option>
-                            <option value="update">update</option>
-                            <option value="registerAch">registerAch &nbsp; * ʳᵉˡᵃᵗᵉˢ ᵗᵒ ᴬᶜʰ ᴶᵃᶜᵏ ᴴᵉⁿʳʸ</option> <!-- &#691;&#7497;&#737;&#7491;&#7511;&#7497;&#738;&#32;&#7511;&#7506;&#32;&#7468;&#7580;&#688;&#32;&#7478;&#7491;&#7580;&#7503;&#32;&#7476;&#7497;&#8319;&#691;&#696; -->
-                            <option value="updateAch">updateAch &nbsp; * ʳᵉˡᵃᵗᵉˢ ᵗᵒ ᴬᶜʰ ᴶᵃᶜᵏ ᴴᵉⁿʳʸ</option>
+                    <div class="col-sm-3"><label for="AMOUNT" class="form-label">Amount</label></div>
+                    <div class="col-sm-2">
+                        <select class="form-select form-select-sm" id="CURRENCY" name="CURRENCY" onchange="updateHash();">
+                            <option value="EUR">EUR</option>
+                            <option value="USD" selected>USD</option>
+                            <option value="CAD">CAD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="BHD">BHD</option>
+                            <option value="KWD">KWD</option>
+                            <option value="JMD">JMD</option>
+                            <option value="VES">VES</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control form-control-sm" id="AMOUNT" name="AMOUNT" value="18.87" onchange="updateHash();" />
+                    </div>
+
+                    <div class="col-sm-3"><label for="CARDNUMBER" class="form-label">Card</label></div>
+                    <div class="col-sm-3" title="Card Number">
+                        <input type="text" class="form-control form-control-sm" id="CARDNUMBER" name="CARDNUMBER" value="5100270000000023" onchange="updateHash();" />
+                    </div>
+                    <div class="col-sm-1" title="Card Expiry">
+                        <input type="text" class="form-control form-control-sm" id="CARDEXPIRY" name="CARDEXPIRY" value="1225" onchange="updateHash();" />
+                    </div>
+                    <div class="col-sm-1" title="CVV">
+                        <input type="text" class="form-control form-control-sm" id="CVV" name="CVV" value="998" />
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select form-select-sm" id="CARDTYPE" name="CARDTYPE" onchange="updateHash();">
+                            <option value="VISA">VISA</option>
+                            <option value="MASTERCARD" selected>MASTERCARD</option>
+                            <option value="SECURECARD">SECURECARD</option>
                         </select>
                     </div>
 
-                    <div class="col-sm-3"><label for="EMAIL" class="form-label">Email</label></div>
+                    <div class="col-sm-3"><label for="CARDHOLDERNAME" class="form-label">Cardholder Name</label></div>
                     <div class="col-sm-9">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" onchange="document.getElementById('EMAIL').disabled = !this.checked;" /></span>
-                            <!--span class="input-group-text"><i class="bi bi-envelope"></i></span-->
-                            <input type="text" class="form-control form-control-sm" id="EMAIL" name="EMAIL" value="vvd.hppsc@worldnettps.it" disabled />
-                        </div>
+                        <input type="text" class="form-control form-control-sm" id="CARDHOLDERNAME" name="CARDHOLDERNAME" value="MPIREQ Cardholder Name" />
                     </div>
 
-                    <div class="col-sm-3"><label for="STOREDCREDENTIALUSE" class="form-label">Stored Credentials Use</label></div>
+                    <div class="col-sm-3"><label for="CARDHOLDER_CHALLENGE" class="form-label">Cardholder Challenge</label></div>
                     <div class="col-sm-9">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" onchange="document.getElementById('STOREDCREDENTIALUSE').disabled = !this.checked;" /></span>
-                            <select class="form-select form-select-sm" id="STOREDCREDENTIALUSE" name="STOREDCREDENTIALUSE" disabled>
-                                <option value="UNSCHEDULED">Unscheduled</option>
-                                <option value="INSTALLMENT">Installment</option>
-                                <option value="RECURRING">Recurring</option>
-                                <option value="INVALID">Invalid</option>
-                                <option value="">Empty</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3"><label for="PAYMENTOPTIONS" class="form-label">Payment Options</label></div>
-                    <div class="col-sm-9">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" id="enablePaymentOptions" onchange="document.getElementById('PAYMENTOPTIONS').disabled = !this.checked;" /></span>
-                            <select class="form-select form-select-sm" id="PAYMENTOPTIONS" name="PAYMENTOPTIONS" disabled>
-                                <option value="CARD">Card</option>
-                                <option value="BANK_TRANSFER">Bank Transfer</option>
-                                <option value="CARD_AND_BANK_TRANSFER">Card and Bank Transfer</option>
+                            <span class="input-group-text"><input type="checkbox" class="form-check-input mt-0 float-end" id="enableChallenge" onchange="document.getElementById('CARDHOLDER_CHALLENGE').disabled = !this.checked;" /></span>
+                            <select class="form-select form-select-sm" id="CARDHOLDER_CHALLENGE" name="CARDHOLDER_CHALLENGE" disabled>
+                                <option value="OPTIONAL">Optional</option>
+                                <option value="REQUIRED">Required</option>
                                 <option value="INVALID">Invalid</option>
                                 <option value="">Empty</option>
                             </select>
@@ -205,22 +221,27 @@
 </footer>
 
 <script>
-    function newMerchantRef() {
-        document.getElementById("MERCHANTREF").value = "HST" + Math.floor(100000000 + Math.random() * 900000000);
-        //alert(Math.random().toString(36).toUpperCase().substring(2, 30));
+    function newOrderId() {
+        document.getElementById("ORDERID").value = "MPIREQ" + Math.floor(100000000 + Math.random() * 900000000);
     }
 
     function updateHash() {
-        //newMerchantRef();
+        //newOrderId();
         const hashFields = [];
 
         hashFields.push(document.getElementById("TERMINALID").value,
-                        document.getElementById("MERCHANTREF").value,
+                        document.getElementById("ORDERID").value,
+                        document.getElementById("CARDNUMBER").value,
+                        document.getElementById("CARDEXPIRY").value,
+                        document.getElementById("CARDTYPE").value
+                        );
+        if (document.getElementById("multicurrency").checked) 
+            hashFields.push(document.getElementById("CURRENCY").value);
+
+        hashFields.push(document.getElementById("AMOUNT").value,
                         document.getElementById("DATETIME").value,
-                        document.getElementById("ACTION").value,
                         document.getElementById("TERMINALSECRET").value
                         );
-
         if (document.getElementById("sha512").checked) {
             hashString = hashFields.join(":");
             sha512(hashString).then((digestHex) => { document.getElementById("HASH").value = digestHex; });
@@ -253,7 +274,7 @@
         const iframe = document.createElement('iframe');
         iframe.name = 'worldnet-payment';
         iframe.allow = 'payment';
-        iframe.style = 'width:100%; height:700px; margin:0; border:1px solid #ccc; border-top:none;';
+        iframe.style = 'width:100%; height:500px; margin:0; border:1px solid #ccc; border-top:none;';
         iframe.src = awesomeForm.action;
         const sandboxRestrictions = document.getElementById('OTHERFIELD_SANDBOX');
         if (!sandboxRestrictions.disabled) {
